@@ -1,0 +1,14 @@
+name: personal-blog
+region: nyc
+static_sites:
+  - name: personal-blog
+    github:
+      repo: dendisuhubdy/personal-blog
+      branch: main
+      deploy_on_push: true
+    build_command: npm install -g pnpm && pnpm install && pnpm run build
+    output_dir: dist
+    environment_slug: node-js
+    domains:
+      - domain: backpropagation.ai
+        type: PRIMARY
