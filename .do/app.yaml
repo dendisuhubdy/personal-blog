@@ -1,14 +1,13 @@
 name: personal-blog
 region: nyc
+domains:
+  - domain: backpropagation.ai
+    type: PRIMARY
 static_sites:
   - name: personal-blog
-    github:
-      repo: dendisuhubdy/personal-blog
+    git:
+      repo_clone_url: https://github.com/dendisuhubdy/personal-blog.git
       branch: main
-      deploy_on_push: true
-    build_command: npm install -g pnpm && pnpm install && pnpm run build
+    build_command: pnpm install && pnpm run build
     output_dir: dist
     environment_slug: node-js
-    domains:
-      - domain: backpropagation.ai
-        type: PRIMARY
