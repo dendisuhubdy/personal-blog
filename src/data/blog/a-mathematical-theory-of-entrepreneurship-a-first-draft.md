@@ -1,5 +1,5 @@
 ---
-title: A Mathematical Theory of Entrepreneurship
+title: "A Mathematical Theory of Entrepreneurship: A First Draft"
 author: Dendi Suhubdy
 pubDatetime: 2026-03-30T00:00:00Z
 featured: true
@@ -23,7 +23,7 @@ The full working manuscript is available on [GitHub](https://github.com/dendisuh
 
 Consider the following scenario, familiar to any serial entrepreneur.
 
-You have built a venture to $5M in annual recurring revenue. The economy is showing late-cycle signs: the yield curve has been inverted for six months, credit spreads are widening, and the VIX term structure is shifting toward backwardation. You have 14 months of runway. A top-tier venture firm has offered a term sheet at a 15x revenue multiple. A venture debt provider is offering $3M at 8% with warrants covering 0.5% of equity. Meanwhile, the SEC has just issued a Wells notice to a competitor operating in your regulatory space, and the EU is finalising MiCA implementation that will require significant compliance infrastructure.
+You have built a venture to \$5M in annual recurring revenue. The economy is showing late-cycle signs: the yield curve has been inverted for six months, credit spreads are widening, and the VIX term structure is shifting toward backwardation. You have 14 months of runway. A top-tier venture firm has offered a term sheet at a 15x revenue multiple. A venture debt provider is offering \$3M at 8% with warrants covering 0.5% of equity. Meanwhile, the SEC has just issued a Wells notice to a competitor operating in your regulatory space, and the EU is finalising MiCA implementation that will require significant compliance infrastructure.
 
 What should you do?
 
