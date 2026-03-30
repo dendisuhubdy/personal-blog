@@ -24,7 +24,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
   <main id="main-content" data-layout="index" class="app-layout">
     <section id="hero" class:list={["pt-8 pb-6", "border-b border-border"]}>
       <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Mingalaba
+        Dendi Suhubdy
       </h1>
       <a
         target="_blank"
@@ -42,25 +42,81 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       </a>
 
       <p>
-        AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-        blog theme. This theme follows best practices and provides accessibility
-        out of the box. Light and dark mode are supported by default. Moreover,
-        additional color schemes can also be configured.
-      </p>
-      <p class="mt-2">
-        Read the blog posts or check
-        <LinkButton
+        Serial tech entrepreneur, investor, researcher, and systems programmer from Indonesia.
+        Fulbright scholar. Former PhD student at <LinkButton
           class="underline decoration-dashed underline-offset-4 hover:text-accent"
-          href="https://github.com/satnaing/astro-paper#readme"
-        >
-          README
-        </LinkButton> for more info.
+          href="https://mila.quebec/">Mila</LinkButton> under <LinkButton
+          class="underline decoration-dashed underline-offset-4 hover:text-accent"
+          href="https://yoshuabengio.org/">Yoshua Bengio</LinkButton>.
+        I build things at the intersection of AI, cryptography, and high-performance computing.
       </p>
+
+      <div class="mt-4 flex flex-wrap gap-2">
+        <img src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="C++" />
+        <img src="https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=c&logoColor=black" alt="C" />
+        <img src="https://img.shields.io/badge/CUDA-76B900?style=for-the-badge&logo=nvidia&logoColor=white" alt="CUDA" />
+        <img src="https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white" alt="Rust" />
+        <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+        <img src="https://img.shields.io/badge/Assembly-6E4C13?style=for-the-badge&logo=assemblyscript&logoColor=white" alt="Assembly" />
+      </div>
+
+      <h2 class="mt-6 text-xl font-semibold">Education</h2>
+      <ul class="mt-2 list-disc list-inside space-y-1">
+        <li><strong>PhD (incomplete), Computer Science — Deep Learning</strong> · Université de Montréal / <LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://mila.quebec/">Mila</LinkButton> · Advisor: <LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://yoshuabengio.org/">Yoshua Bengio</LinkButton></li>
+        <li><strong>M.S. Mathematics</strong> · North Carolina State University · Fulbright Scholar · Advisor: <LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://math.sciences.ncsu.edu/people/tpang/">Tao Pang</LinkButton></li>
+        <li><strong>B.S. Economics</strong> · University of Indonesia · Advisor: <LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://feb.ui.ac.id/pimpinan-departemen-dan-program-studi/gede-harja-wasistha/">Gede Wasis</LinkButton></li>
+      </ul>
+
+      <h2 class="mt-6 text-xl font-semibold">Current Ventures</h2>
+      <ul class="mt-2 list-disc list-inside space-y-1">
+        <li><LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://scorpionintelligence.xyz">Scorpion Intelligence</LinkButton> — An Offensive Cybersecurity firm, security tools and exploit broker</li>
+      </ul>
+
+      <h2 class="mt-6 text-xl font-semibold">Ventures Built</h2>
+      <ul class="mt-2 list-disc list-inside space-y-1">
+        <li><LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://bitwyre.com">Bitwyre</LinkButton> — A crypto derivatives and spot exchange specializing in stablecoins</li>
+        <li><LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://systematictradinggroup.com">Systematic Trading Group</LinkButton> — A High Frequency Trading (HFT) proprietary fund and market maker</li>
+        <li><LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://mylobster.ai">MyLobster</LinkButton> — An AI Agentic Orchestration Platform</li>
+        <li><LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://durian.market">Durian Market</LinkButton> — A Secure Web File Server</li>
+        <li><LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://pasarsapi.net">Pasar Sapi</LinkButton> — A Cow Market Place in Indonesia</li>
+      </ul>
+
+      <h2 class="mt-6 text-xl font-semibold">Open Source</h2>
+      <ul class="mt-2 list-disc list-inside space-y-1">
+        <li><LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://github.com/dendisuhubdy/libtorch_examples">libtorch_examples</LinkButton> — Libtorch C++ Examples</li>
+        <li><LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://github.com/dendisuhubdy/blaze">blaze</LinkButton> — C++ HPC Math Library</li>
+        <li><LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://github.com/dendisuhubdy/dark_pool">dark_pool</LinkButton> — Dark Pool matching engine in C++</li>
+        <li><LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://github.com/dendisuhubdy/quanttrade">quanttrade</LinkButton> — Quantitative Trading Library</li>
+        <li><LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://github.com/dendisuhubdy/liquibook">liquibook</LinkButton> — Order Book implementation with CMake build system</li>
+        <li><LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://github.com/dendisuhubdy/vfae">vfae</LinkButton> — Variational Fair Autoencoder (Research)</li>
+        <li><LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://github.com/dendisuhubdy/fix_server">fix_server</LinkButton> — Order Management System</li>
+      </ul>
+
+      <h2 class="mt-6 text-xl font-semibold">Publications</h2>
+      <p class="mt-2"><LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://scholar.google.com/citations?user=x3M1yCQAAAAJ&hl=en&oi=ao">Google Scholar</LinkButton></p>
+      <ul class="mt-2 list-disc list-inside space-y-2">
+        <li>
+          <strong>ChatPainter: Improving Text to Image Generation using Dialogue</strong> (2018)<br/>
+          Shikhar Sharma, <strong>Dendi Suhubdy</strong>, Vincent Michalski, Samira Ebrahimi Kahou, Yoshua Bengio
+          · <LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://arxiv.org/abs/1802.08216">arXiv</LinkButton>
+        </li>
+        <li>
+          <strong>Fraternal Dropout</strong> (2018) — <em>ICLR 2018</em><br/>
+          Konrad Zolna, Devansh Arpit, <strong>Dendi Suhubdy</strong>, Yoshua Bengio
+          · <LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://arxiv.org/abs/1711.00066">arXiv</LinkButton>
+        </li>
+        <li>
+          <strong>A Deep Reinforcement Learning Chatbot</strong> (2017)<br/>
+          Iulian V. Serban, Chinnadhurai Sankar, Mathieu Germain, Saizheng Zhang, Zhouhan Lin, Sandeep Subramanian, Taesup Kim, Michael Pieper, Sarath Chandar, Nan Rosemary Ke, Sai Rajeshwar, Alexandre de Brebisson, Jose M. R. Sotelo, <strong>Dendi Suhubdy</strong>, Vincent Michalski, Alexandre Nguyen, Joelle Pineau, Yoshua Bengio
+          · <LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="https://arxiv.org/abs/1709.02349">arXiv</LinkButton>
+        </li>
+      </ul>
+
       {
         // only display if at least one social link is enabled
         SOCIALS.length > 0 && (
-          <div class="mt-4 flex max-sm:flex-col sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
+          <div class="mt-6 flex max-sm:flex-col sm:items-center">
+            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Contact:</div>
             <Socials />
           </div>
         )
