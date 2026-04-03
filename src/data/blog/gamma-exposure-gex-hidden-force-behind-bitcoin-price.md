@@ -11,10 +11,10 @@ tags:
   - derivatives
   - trading
   - quantitative-finance
-description: "Bitcoin's price isn't just driven by supply and demand. A $507 million invisible hand -- dealer gamma exposure -- now dwarfs ETF flows by 13x and mechanically pins, repels, or accelerates price through options hedging dynamics. A deep dive into the math, the market structure, and the Q1 2026 gamma trap."
+description: "Bitcoin's price isn't just driven by supply and demand. A \\$507 million invisible hand -- dealer gamma exposure -- now dwarfs ETF flows by 13x and mechanically pins, repels, or accelerates price through options hedging dynamics. A deep dive into the math, the market structure, and the Q1 2026 gamma trap."
 ---
 
-My friend [Andrea Dal Mas](https://www.linkedin.com/pulse/gamma-exposure-gex-hidden-force-behind-short-term-price-dal-mas-3vcdc/) recently published a concise piece on Gamma Exposure (GEX) and its role in Bitcoin price dynamics. Andrea nailed the intuition: options market makers who want to stay delta-neutral create massive mechanical flows that either suppress or amplify volatility, depending on the sign of their aggregate gamma. What follows is an extended treatment of the same thesis, with the math, the data, and the Q1 2026 receipts.
+[Andrea Dal Mas](https://www.linkedin.com/pulse/gamma-exposure-gex-hidden-force-behind-short-term-price-dal-mas-3vcdc/) recently published a concise piece on Gamma Exposure (GEX) and its role in Bitcoin price dynamics. Andrea nailed the intuition: options market makers who want to stay delta-neutral create massive mechanical flows that either suppress or amplify volatility, depending on the sign of their aggregate gamma. What follows is an extended treatment of the same thesis, with the math, the data, and the Q1 2026 receipts.
 
 If you trade Bitcoin and you are not watching GEX, you are flying blind.
 
@@ -94,7 +94,7 @@ As Andrea described in his original piece, several specific price levels emerge 
 
 These are strikes with massive concentrations of open interest. A **Call Wall** acts as heavy overhead resistance because positive gamma hedging flows sell into any rally toward it. A **Put Wall** acts as a floor, with hedging flows buying into declines toward it.
 
-In Q1 2026, the put wall sat near **$60,000** and the call wall near **$80,000**, creating a wide gravitational band.
+In Q1 2026, the put wall sat near **\$60,000** and the call wall near **\$80,000**, creating a wide gravitational band.
 
 ### Peak GEX Strikes
 
@@ -102,7 +102,7 @@ The strikes with the highest absolute gamma exposure act as **price magnets**. A
 
 ### The Zero-Gamma Level in Practice
 
-In early 2026, the zero-gamma level for Bitcoin hovered around **$68,000**. When BTC dropped below this threshold in March, the regime flipped from positive to negative gamma, and dealer hedging shifted from stabilizing to destabilizing. The result: a 5% single-day decline to $65,720 around the March 27 quarterly expiry.
+In early 2026, the zero-gamma level for Bitcoin hovered around **\$68,000**. When BTC dropped below this threshold in March, the regime flipped from positive to negative gamma, and dealer hedging shifted from stabilizing to destabilizing. The result: a 5% single-day decline to \$65,720 around the March 27 quarterly expiry.
 
 ---
 
@@ -110,7 +110,7 @@ In early 2026, the zero-gamma level for Bitcoin hovered around **$68,000**. When
 
 Here is the number that should change how you think about Bitcoin markets:
 
-In December 2025, dealer gamma exposure stood at **$507 million**. Daily Bitcoin ETF flows at the time averaged **$38 million**. Dealer gamma was **13x larger** than the ETF flows that dominated crypto media headlines.
+In December 2025, dealer gamma exposure stood at **\$507 million**. Daily Bitcoin ETF flows at the time averaged **\$38 million**. Dealer gamma was **13x larger** than the ETF flows that dominated crypto media headlines.
 
 This means that in the short term, the mechanical hedging flows from options market makers overwhelm the directional flows from ETFs, spot buyers, and even most whale transactions. The price action you see on a 1-hour or 4-hour chart is often not supply meeting demand. It is a market maker rebalancing their gamma book.
 
@@ -118,23 +118,23 @@ This means that in the short term, the mechanical hedging flows from options mar
 
 ## Historical Case Studies
 
-### December 2025: The $415 Million Gamma Flush
+### December 2025: The \$415 Million Gamma Flush
 
-Between December 19 and December 26, 2025, **$415 million (66.8%)** of total dealer gamma expired. This was the largest options expiry event in crypto history: **$23.6 billion** in BTC options plus $3.8 billion in ETH options, totaling nearly $27 billion in notional value. Over 50% of Deribit's entire open interest expired in a single event.
+Between December 19 and December 26, 2025, **\$415 million (66.8%)** of total dealer gamma expired. This was the largest options expiry event in crypto history: **\$23.6 billion** in BTC options plus \$3.8 billion in ETH options, totaling nearly \$27 billion in notional value. Over 50% of Deribit's entire open interest expired in a single event.
 
-Before the expiry, Bitcoin was pinned between **$85,000 and $90,000** for weeks. Dips to $85k were reliably bought; rallies to $90k were reliably sold. This was not "support and resistance" in the traditional technical analysis sense. It was mechanical: dealers hedging their gamma book created an invisible range.
+Before the expiry, Bitcoin was pinned between **\$85,000 and \$90,000** for weeks. Dips to \$85k were reliably bought; rallies to \$90k were reliably sold. This was not "support and resistance" in the traditional technical analysis sense. It was mechanical: dealers hedging their gamma book created an invisible range.
 
-After the gamma flush, the structural pin was removed. Max pain sat at $96,000, and Bitcoin was finally free to move directionally.
+After the gamma flush, the structural pin was removed. Max pain sat at \$96,000, and Bitcoin was finally free to move directionally.
 
 ### Q1 2026: The Gamma Trap
 
-Q1 2026 delivered Bitcoin's worst quarterly performance since 2018, with price falling 23% from approximately $87,500 to $67,800.
+Q1 2026 delivered Bitcoin's worst quarterly performance since 2018, with price falling 23% from approximately \$87,500 to \$67,800.
 
 The options structure told the story:
 - **Put/call open interest ratio** hit **0.77**, the highest since June 2021
-- Heavy put demand between **$68,000 and the mid-$50,000s** created a massive negative gamma zone
-- When Bitcoin broke below the zero-gamma level around $68,000, self-reinforcing selling kicked in
-- The **March 27 quarterly expiry** cleared $14.16 billion in BTC options, wiping out 40% of open positions
+- Heavy put demand between **\$68,000 and the mid-\$50,000s** created a massive negative gamma zone
+- When Bitcoin broke below the zero-gamma level around \$68,000, self-reinforcing selling kicked in
+- The **March 27 quarterly expiry** cleared \$14.16 billion in BTC options, wiping out 40% of open positions
 
 The mechanics were textbook negative gamma: as price fell, dealers who were short puts needed to sell more BTC to maintain delta neutrality. This selling pressure pushed price lower, which increased their delta exposure further, requiring even more selling. A self-reinforcing doom loop.
 
@@ -248,14 +248,14 @@ GEX is not a buy/sell signal. It is a **regime indicator**. Here is how to use i
 
 ## Where We Are Now: April 2026
 
-As of early April 2026, Bitcoin trades around **$66,470**, firmly in the negative gamma zone below the ~$68,000 zero-gamma level. The put/call OI ratio at 0.77 reflects the most defensive positioning since June 2021. Heavy put demand between $60,000 and $68,000 means dealer hedging flows are currently amplifying downside moves.
+As of early April 2026, Bitcoin trades around **\$66,470**, firmly in the negative gamma zone below the ~\$68,000 zero-gamma level. The put/call OI ratio at 0.77 reflects the most defensive positioning since June 2021. Heavy put demand between \$60,000 and \$68,000 means dealer hedging flows are currently amplifying downside moves.
 
-The March 27 quarterly expiry cleared $14.16 billion in options and removed 40% of open positions, but the rebuilding of the options book is already underway. Institutional call-sellers who spent Q1 generating yield by selling upside exposure lost their structural cushion at expiry, leaving Bitcoin more exposed to macro forces.
+The March 27 quarterly expiry cleared \$14.16 billion in options and removed 40% of open positions, but the rebuilding of the options book is already underway. Institutional call-sellers who spent Q1 generating yield by selling upside exposure lost their structural cushion at expiry, leaving Bitcoin more exposed to macro forces.
 
 The key levels to watch:
-- **$68,000**: The approximate zero-gamma level. A sustained move above this flips the regime to positive gamma and stabilizing flows.
-- **$60,000**: The put wall. Heavy put OI here creates a gamma support floor -- unless it breaks, at which point negative gamma acceleration would intensify.
-- **$80,000**: The call wall. Heavy call OI creates resistance that would cap rallies in a positive gamma environment.
+- **\$68,000**: The approximate zero-gamma level. A sustained move above this flips the regime to positive gamma and stabilizing flows.
+- **\$60,000**: The put wall. Heavy put OI here creates a gamma support floor -- unless it breaks, at which point negative gamma acceleration would intensify.
+- **\$80,000**: The call wall. Heavy call OI creates resistance that would cap rallies in a positive gamma environment.
 
 The structural message is clear: until Bitcoin reclaims the zero-gamma level, the path of least resistance is volatile and directional. The invisible hand of dealer hedging is pushing, not cushioning.
 
