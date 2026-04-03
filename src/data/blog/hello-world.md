@@ -2,7 +2,7 @@
 title: Hello World
 author: Dendi Suhubdy
 pubDatetime: 2026-02-16T00:00:00Z
-featured: true
+featured: false
 draft: false
 tags:
   - general

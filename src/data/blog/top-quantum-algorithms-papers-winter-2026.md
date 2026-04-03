@@ -2,7 +2,7 @@
 title: "Top Quantum Algorithms Papers of Winter 2026: Applications and Implications"
 author: Dendi Suhubdy
 pubDatetime: 2026-03-30T00:00:00Z
-featured: true
+featured: false
 draft: false
 tags:
   - quantum-computing

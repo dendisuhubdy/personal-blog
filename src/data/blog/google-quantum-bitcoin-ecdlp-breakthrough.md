@@ -2,7 +2,7 @@
 title: "Google Just Cut the Quantum Resources to Break Bitcoin's Cryptography by 20x"
 author: Dendi Suhubdy
 pubDatetime: 2026-03-31T00:00:00Z
-featured: true
+featured: false
 draft: false
 tags:
   - quantum-computing

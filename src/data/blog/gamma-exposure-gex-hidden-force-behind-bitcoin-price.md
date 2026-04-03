@@ -2,7 +2,7 @@
 title: "Gamma Exposure (GEX): The Hidden Force Behind Bitcoin Price"
 author: Dendi Suhubdy
 pubDatetime: 2026-04-03T00:00:00Z
-featured: true
+featured: false
 draft: false
 tags:
   - bitcoin
