@@ -9,46 +9,74 @@ tags:
   - superintelligence
   - alignment
   - thought-experiment
-description: "Nearly all public discourse on Artificial Super Intelligence fixates on how it might destroy us. Almost nobody writes concretely about what happens if we get it right."
+description: "Nearly all public discourse on Artificial Super Intelligence fixates on how it might destroy us. Almost nobody writes concretely about what happens if we get it right. Here is that essay."
 ---
 
-In the growing library of essays about Artificial Super Intelligence, the shelf labelled "doom" groans under the weight. The shelf labelled "what if it goes well" is nearly bare. For every hundred papers modelling the catastrophic risks of ASI, perhaps one attempts to describe, in concrete and quantified terms, what a successfully aligned superintelligence might actually achieve. The asymmetry is understandable---the stakes of failure are extinction---but it is also intellectually incomplete. A civilisation pouring billions into alignment research ought to have some idea of what it is aligning *toward*.
+Nearly every serious essay about Artificial Super Intelligence opens with a warning. The existential risk is real, the alignment problem is hard, and the default outcome---so the argument goes---is catastrophic. I take these concerns seriously. But I have noticed a striking asymmetry: for every hundred essays about how ASI might end civilization, there is maybe one about what happens if we actually solve alignment and deploy it well.
 
-This essay attempts to fill part of that gap. It assumes, as a thought experiment, that within the next decade humanity builds a system that is genuinely superintelligent and that the alignment problem is solved: the system reliably pursues goals humanity endorses, under robust oversight. What follows is not prediction. It is an exploration of the upper bound of what becomes possible---grounded, where the data permits, in trajectories already under way.
+This is that one.
 
----
+I want to run a thought experiment. Assume that sometime in the next decade, we build a system that is genuinely superintelligent---not a better chatbot, but a system that can do novel scientific research, engineering design, and strategic reasoning at a level that exceeds the best humans in every domain. And assume we solve the alignment problem: this system reliably pursues goals that humanity endorses, with robust oversight mechanisms in place.
 
-## The pessimism premium
-
-The imbalance in ASI discourse is not accidental. Those who think most carefully about superintelligence tend to be drawn to the subject precisely because of the risks. Eliezer Yudkowsky, Stuart Russell and the broader alignment-research community are motivated by preventing catastrophe, not by composing hymns to utopia. This is rational and necessary. But it produces a literature in which the only detailed, quantified scenarios are the negative ones.
-
-There is also the matter of psychology. Daniel Kahneman's work on prospect theory established that humans weight losses roughly twice as heavily as equivalent gains. Dystopia reads as serious analysis; utopia reads as marketing copy. Nick Bostrom, who wrote the canonical text on AI existential risk (*Superintelligence*, 2014), also penned a short, luminous piece called [*Letter from Utopia*](https://nickbostrom.com/utopia) in 2008. It is largely forgotten. His warning sold millions of copies.
-
-Yet intellectual seriousness demands examining both tails of the distribution. What follows is an attempt to do so.
+What happens next?
 
 ---
 
-## The compressed century
+## The Pessimism Asymmetry
 
-The most useful framework for thinking about the upside of ASI comes from Dario Amodei, the chief executive of Anthropic, in his 2024 essay [*Machines of Loving Grace*](https://darioamodei.com/essay/machines-of-loving-grace). He calls it the **compressed 21st century**: all the scientific and technological progress humanity would have made over the next 75 to 100 years, compressed into five to ten.
+Before diving in, it is worth asking: why is optimism about ASI so rare in serious writing?
 
-This is not magic. It is arithmetic. Imagine millions of copies of researchers operating at Nobel-laureate calibre, working at ten to a hundred times human speed, around the clock, across every scientific discipline simultaneously. Each instance can hold the entirety of a field's literature in working memory and design experiments with perfect recall of every prior result.
+Part of the answer is selection bias. People who think deeply about ASI tend to be drawn to the problem *because* of the risks. Eliezer Yudkowsky, Stuart Russell, and the broader alignment research community are motivated by preventing catastrophe, not by daydreaming about utopia. This is rational and important. But it creates a discourse where the only detailed, concrete, quantified scenarios are the negative ones.
 
-Mr Amodei also introduces an important corrective: the concept of **marginal returns to intelligence**. In some domains, the binding constraint is not intelligence but irreducible physical limits. Clinical trials take years because biology operates on biological time. Particle physics requires building new accelerators. The right question, then, is not "what can superintelligence solve?" but "in which domains is intelligence, rather than time or data, the binding constraint?" The answer is: most of the ones that matter.
+Nick Bostrom, who wrote the book on AI existential risk, also wrote a short piece called *Letter from Utopia* in 2008---a fictional letter from a posthuman future describing what life could be like. It is beautiful and largely forgotten. His risk analysis, *Superintelligence*, sold millions.
+
+There is also a deeper psychological pattern. Daniel Kahneman documented that humans weight losses roughly twice as heavily as equivalent gains. Dystopia feels *serious*. Utopia feels *naive*. An essay arguing that ASI might cure cancer reads like a press release; an essay arguing it might cause human extinction reads like a warning from a prophet.
+
+But intellectual seriousness requires examining both tails of the distribution. If we are going to spend billions on alignment research---and we should---we need to understand what we are aligning *toward*, not just what we are aligning *away from*.
 
 ---
 
-## The end of involuntary death
+## The Compressed 21st Century
 
-Consider what has already been achieved with crude tools. Global life expectancy has roughly doubled since 1900, from around 32 years to over 73, driven by antibiotics, sanitation, vaccines and basic surgery---technologies developed with only a rudimentary understanding of the underlying molecular biology.
+Dario Amodei, CEO of Anthropic, offered the most useful framework for thinking about this in his essay [*Machines of Loving Grace*](https://darioamodei.com/essay/machines-of-loving-grace). He calls it the **Compressed 21st Century**: all the scientific and technological progress that humanity would have made over the next 75--100 years, compressed into 5--10 years.
+
+This is not magic. It is the straightforward consequence of what happens when you have millions of copies of Nobel-caliber researchers working 10--100x human speed, 24 hours a day, 365 days a year, across every scientific discipline simultaneously. Each copy can read every paper ever published, hold the entirety of a field's knowledge in working memory, and design experiments with perfect recall of every prior result.
+
+The key insight is that intelligence is currently the bottleneck for most scientific progress. Not funding, not motivation, not data---*intelligence*. The number of humans capable of making fundamental breakthroughs in any given field is measured in the dozens. ASI removes that bottleneck.
+
+But Amodei also introduces an important corrective: the concept of **marginal returns to intelligence**. In some domains, progress is bottlenecked not by intelligence but by irreducible physical constraints. Clinical trials take years because biology runs on biological time. Particle physics experiments require building new accelerators. Sociology requires observing human behavior across decades.
+
+So the right question is not "what can superintelligence solve?" but rather: **"In which domains does intelligence, not time or data, constitute the binding constraint?"**
+
+The answer turns out to be: most of the ones that matter.
+
+---
+
+## Domain 1: The End of Involuntary Death
+
+Start with the most profound: aging and disease.
+
+Human lifespan doubled in the 20th century, from roughly 40 to 75 years. That was achieved with crude tools---antibiotics, sanitation, vaccines, basic surgery. We did not understand the molecular mechanisms of aging. We barely understood the genome.
 
 <iframe src="https://ourworldindata.org/grapher/life-expectancy?tab=line-chart&time=1900..latest&country=~OWID_WRL" loading="lazy" style="width: 100%; height: 600px; border: 0px none;" allow="web-share; clipboard-write"></iframe>
 
 <small>Source: [Our World in Data](https://ourworldindata.org/grapher/life-expectancy), drawing on UN World Population Prospects and the Human Mortality Database.</small>
 
-The trajectory is clear: each major technological epoch bends the curve upward. The question is what happens when an intelligence capable of modelling protein folding, gene regulatory networks and cellular signalling pathways at arbitrary depth turns its full attention to biology.
+Now consider what becomes possible when an intelligence that can model protein folding, gene regulatory networks, and cellular signaling pathways at arbitrary depth turns its attention to biology:
 
-The early returns from narrow AI are already striking. DeepMind's **AlphaFold** has predicted the three-dimensional structure of over 200m proteins---essentially the entire known protein universe---and is now used by more than 3m researchers across 190 countries. It doubled the ratio of druggable protein binding sites from 19.8% to 41.8%. Meanwhile, AI-designed drug candidates in clinical trials grew from three programmes in 2016 to over 173 by 2026. Early-stage AI-designed molecules show 80--90% Phase I success rates, compared with a historical average of 52%.
+| Problem | Current status | Post-ASI projection |
+|---------|---------------|-------------------|
+| Cancer | ~2% annual mortality decline | 95%+ reduction in incidence and mortality |
+| Alzheimer's | No disease-modifying treatment | Molecular mechanism fully mapped, targeted interventions |
+| Genetic diseases | ~6,000 known, most untreatable | Broad gene therapy across all monogenic disorders |
+| Infectious disease | Malaria kills 600K+ per year | Near-complete eradication via designed vaccines/antivirals |
+| Aging itself | No approved interventions | Longevity escape velocity---gaining more than one year of life expectancy per year lived |
+
+This is not speculation from science fiction. The trajectory is already visible:
+
+**AlphaFold** predicted the 3D structure of over 200 million proteins---essentially the entire known protein universe. More than 3 million researchers in 190 countries use it. It doubled the ratio of druggable protein binding sites from 19.8% to 41.8%. And AlphaFold is not superintelligent. It is a narrow tool that does one thing well.
+
+**AI-designed drug candidates** in clinical trials grew from 3 in 2016 to over 173 programs in 2026. Early-stage AI-designed molecules show 80--90% Phase I success rates versus the historical average of 52%. Insilico Medicine developed a preclinical candidate in under 18 months---a process that traditionally takes 3--6 years.
 
 The cost of sequencing a full human genome tells a similar story of exponential improvement---one that has outpaced even Moore's Law:
 
@@ -56,25 +84,21 @@ The cost of sequencing a full human genome tells a similar story of exponential 
 
 <small>Source: [Our World in Data](https://ourworldindata.org/grapher/cost-of-sequencing-a-full-human-genome), drawing on NHGRI data.</small>
 
-A full genome cost roughly \$100m in 2001. Today it costs less than \$1,000. This is the trajectory that ASI would not merely continue but steepen dramatically.
+Scale this up by many orders of magnitude. An aligned ASI could design, simulate, and iterate on therapeutic molecules faster than any pharmaceutical company can schedule a meeting. It could model the interactions between thousands of drugs and biological pathways simultaneously. It could design clinical trials that extract maximum information from minimum patients, or even develop validated *in silico* models of human biology that reduce the need for physical trials altogether.
 
-Mr Amodei's specific estimates are worth stating plainly. He projects a 95% or greater reduction in cancer incidence and mortality, near-complete eradication of infectious diseases, broad gene therapy across all monogenic disorders, and a doubling of human lifespan to approximately 150 years---all within the first decade of powerful AI. Ray Kurzweil, whose prediction track record runs at roughly 86% accuracy, forecasts that "longevity escape velocity"---the point at which medicine adds more than one year of life expectancy per calendar year lived---will arrive by approximately 2029.
+Ray Kurzweil predicts we will reach **longevity escape velocity** by approximately 2029. That is the point at which medical progress adds more than one year of life expectancy per calendar year. Whether you believe his timeline or not, the concept is sound: once intelligence is no longer the bottleneck, the rate of medical progress becomes limited primarily by the speed of biological experiments, not by the speed of human thought.
 
-| Disease burden | Current trajectory | Post-ASI projection (Amodei) |
-|---|---|---|
-| Cancer mortality | ~2% annual decline | 95%+ reduction in incidence and mortality |
-| Alzheimer's disease | No disease-modifying treatment approved | Molecular mechanism fully mapped; targeted interventions |
-| Genetic diseases | ~6,000 known, most untreatable | Broad gene therapy across monogenic disorders |
-| Infectious disease | Malaria kills 600,000+ per year | Near-complete eradication via designed vaccines and antivirals |
-| Ageing itself | No approved interventions | Longevity escape velocity: >1 year of life expectancy gained per year |
+Amodei's specific estimate: human lifespan could double to approximately 150 years within the first decade of powerful AI.
 
-Whether these timelines prove correct is unknowable. What is not in dispute is the direction.
+Read that again. *One hundred and fifty years.*
+
+And that may be conservative. Once you understand aging at the molecular level, "150 years" is an arbitrary number constrained only by our current inability to imagine what it means to not die of old age.
 
 ---
 
-## The energy problem, nearly solved
+## Domain 2: Unlimited Clean Energy
 
-Energy is the master resource. Nearly every constraint on human civilisation---food production, desalination, transport, manufacturing, computation itself---reduces, in the final analysis, to an energy constraint. Solve energy, and most of scarcity dissolves with it.
+Energy is the master resource. Nearly every constraint on human civilization---food production, water desalination, transportation, manufacturing, computation itself---reduces to an energy constraint. Solve energy and you solve most of scarcity.
 
 The cost trajectory of solar photovoltaics is among the most remarkable in the history of technology:
 
@@ -82,45 +106,73 @@ The cost trajectory of solar photovoltaics is among the most remarkable in the h
 
 <small>Source: [Our World in Data](https://ourworldindata.org/grapher/solar-pv-prices), drawing on IRENA and historical data.</small>
 
-The price of a solar module has fallen from roughly \$106 per watt in 1976 to under \$0.30 today---a decline of more than 99.7%. The International Renewable Energy Agency (IRENA) reports that utility-scale solar levelised cost of energy (LCOE) fell from \$0.381 per kWh in 2010 to under \$0.049 by 2023. According to the International Energy Agency's *World Energy Outlook 2024*, solar PV is on course to become the world's largest source of electricity by the early 2030s.
+The price of a solar module has fallen from roughly \$106 per watt in 1976 to under \$0.30 today---a decline of more than 99.7%. The [International Renewable Energy Agency](https://www.irena.org/costs) (IRENA) reports that utility-scale solar LCOE fell from \$0.381 per kWh in 2010 to under \$0.049 by 2023. According to the [IEA's *World Energy Outlook 2024*](https://www.iea.org/reports/world-energy-outlook-2024), solar PV is on course to become the world's largest source of electricity by the early 2030s.
 
-Yet even these gains were achieved without superintelligent optimisation of the underlying materials science, grid architecture or storage chemistry. Nuclear fusion, the long-promised source of near-limitless clean energy, remains bottlenecked not by physics---the sun demonstrates the principle continuously---but by the staggering complexity of controlling plasma at 150m degrees across dozens of interacting variables: turbulence, instabilities, magnetic field geometry, materials degradation. The parameter space exceeds human intuition and resists brute-force simulation. It is, in other words, precisely the sort of problem at which ASI excels.
+Yet even these gains were achieved without superintelligent optimization of the underlying materials science, grid architecture, or storage chemistry.
 
-AI is already making inroads. Princeton's **STELLAR-AI** programme uses machine learning to accelerate fusion plasma simulations. MIT researchers have deployed AI to predict and prevent plasma disruptions in real time. DeepMind demonstrated that machine learning can control plasma shape in tokamaks---the multi-dimensional control problem that has stymied physicists for decades.
+**Nuclear fusion** has been "30 years away" for 60 years. The reason is not that fusion is physically impossible---the sun does it continuously. The reason is that controlling plasma at 150 million degrees involves a staggering number of interacting variables: turbulence, instabilities, magnetic field geometry, materials degradation. The parameter space is too large for human intuition and too complex for brute-force simulation.
 
-An aligned ASI could go considerably further: designing entirely new reactor geometries, discovering novel plasma confinement strategies, solving the materials-science problem (what do you build a wall out of when the substance touching it is hotter than the sun?), and optimising the engineering for mass production. The end state---energy too cheap to meter---is not a slogan but a plausible engineering outcome.
+This is precisely the kind of problem where ASI excels.
 
----
+AI is already making inroads. Princeton's **STELLAR-AI** program is using machine learning to accelerate fusion plasma simulations. MIT researchers used AI to predict and prevent plasma disruptions in real time. DeepMind's techniques for controlling plasma shape in tokamaks demonstrated that machine learning can handle the multi-dimensional control problem that has stymied physicists for decades.
 
-## Physics, unstuck
+An ASI could go further: design entirely new reactor geometries, discover novel plasma confinement strategies, solve the materials science problems (what do you build a wall out of when the thing touching it is hotter than the sun?), and optimize the engineering for mass production.
 
-Fundamental physics has been substantially stuck for roughly half a century. The Standard Model was completed in the 1970s. String theory has produced no testable predictions in four decades. There is no quantum theory of gravity. Dark matter and dark energy, which together constitute 95% of the universe's mass-energy content, remain unexplained. The last major theoretical breakthrough---the Higgs mechanism---was proposed in 1964 and confirmed experimentally only in 2012.
-
-A principal reason for the stagnation is that the mathematics required to make further progress has begun to exceed human cognitive capacity. The equations governing quantum gravity involve structures---higher-dimensional topology, nonperturbative effects in quantum field theory, the landscape of string vacua---that no human mind can hold simultaneously.
-
-A superintelligent system would face no such limitation. It could unify general relativity and quantum mechanics, determine the nature of dark matter and dark energy, resolve the black hole information paradox, and---perhaps most valuably---design experimental apparatus that no human has yet conceived. The history of physics is, in large part, the history of new instruments revealing new phenomena.
-
-In mathematics, the early evidence is suggestive. AI models achieved gold-medal performance at the 2025 International Mathematical Olympiad. Terence Tao, widely regarded as the foremost living mathematician, has observed that AI's immediate value lies in handling "the thousand small cases that are conceptually straightforward but too time-consuming" for humans. The Millennium Prize Problems---the Riemann Hypothesis, P versus NP, the Navier-Stokes existence and smoothness problem, and others---represent the outer frontier of human mathematical capability. They may not represent the outer frontier of *capability*, full stop.
-
-David Deutsch, the Oxford physicist and father of quantum computation, captures the broader point in what he calls the Principle of Optimism: "All evils are caused by insufficient knowledge." If that is true, then a system capable of generating knowledge at unprecedented speed and depth is, by definition, the most powerful force for good ever created.
+The end state is energy that is effectively too cheap to meter. Not free---infrastructure costs exist---but cheap enough that the cost of energy ceases to be a meaningful constraint on what humanity can do.
 
 ---
 
-## Poverty: the \$10,000 question
+## Domain 3: Solving the Deepest Problems in Physics and Mathematics
 
-Global extreme poverty has already fallen at a pace that would have astonished any observer in 1800. The share of the world's population living on less than \$2.15 per day (in 2017 purchasing-power parity) declined from roughly 75% in 1820 to under 10% today:
+This is the domain I find most intellectually exciting, and the one where existing optimistic essays are weakest.
+
+Fundamental physics has been stuck for roughly 50 years. The Standard Model was completed in the 1970s. String theory has produced no testable predictions in four decades. We have no quantum theory of gravity. We do not understand dark matter or dark energy, which together constitute 95% of the universe's mass-energy content. The last major theoretical breakthrough---the Higgs mechanism---was proposed in 1964 and confirmed experimentally in 2012.
+
+Why the stagnation? Several reasons, but a key one is that the mathematics required to make progress has exceeded human cognitive capacity. The equations governing quantum gravity involve mathematical structures---higher-dimensional topology, nonperturbative effects in quantum field theory, the landscape of string vacua---that no human can hold in working memory simultaneously.
+
+ASI changes this calculus entirely.
+
+A superintelligent system could:
+
+1. **Unify general relativity and quantum mechanics.** This is arguably the deepest open problem in physics. It may require new mathematics that does not yet exist. ASI could invent that mathematics
+2. **Determine the nature of dark matter and dark energy.** Sift through all existing cosmological data, propose new theoretical frameworks, and design experiments to test them
+3. **Solve the black hole information paradox.** Resolve whether information is truly lost when matter falls into a black hole, with implications for the fundamental nature of spacetime
+4. **Design experiments we cannot currently conceive.** The history of physics is the history of new instruments revealing new phenomena. ASI could design particle detectors, gravitational wave observatories, and cosmological surveys of unprecedented sensitivity
+
+In mathematics, the trajectory is already clear:
+
+- AI models achieved **gold-medal performance at the 2025 International Mathematical Olympiad**
+- Terence Tao, arguably the world's greatest living mathematician, has said AI's immediate value is in handling "the thousand small cases that are conceptually straightforward but too time-consuming" for humans
+
+The Millennium Prize Problems---the Riemann Hypothesis, P vs NP, the Navier-Stokes existence and smoothness problem, and others---represent the outer frontier of human mathematical capability. A system operating many orders of magnitude beyond human mathematical reasoning could potentially resolve all of them. And beyond the Millennium Problems lie questions we have not yet had the intelligence to formulate.
+
+David Deutsch captures this in his *Principle of Optimism*: "All evils are caused by insufficient knowledge." If every problem that is interesting is also soluble given sufficient knowledge, then ASI---as a knowledge-generating system of unprecedented power---could solve every soluble problem.
+
+---
+
+## Domain 4: Ending Poverty in a Decade
+
+Global poverty is often framed as a resource problem or a political problem. It is both. But it is also, fundamentally, an optimization problem operating at a scale that exceeds human institutional capacity.
+
+The share of the world's population living in extreme poverty has already fallen at a pace that would have astonished any observer two centuries ago:
 
 <iframe src="https://ourworldindata.org/grapher/share-of-population-in-extreme-poverty?time=1820..latest" loading="lazy" style="width: 100%; height: 600px; border: 0px none;" allow="web-share; clipboard-write"></iframe>
 
 <small>Source: [Our World in Data](https://ourworldindata.org/grapher/share-of-population-in-extreme-poverty), drawing on the World Bank Poverty and Inequality Platform and historical estimates.</small>
 
-This is the most underappreciated chart in the world. But the remaining poverty is also the hardest to reach. Sub-Saharan Africa's GDP per capita sits at roughly \$2,000, according to [World Bank data](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=ZG). Lifting the region to China's current level of approximately \$12,000--\$14,000 would require growth rates that no conventional development programme has achieved at scale.
+From roughly 75% in 1820 to under 10% today. This is the most underappreciated chart in the world.
 
-Mr Amodei makes a striking claim: that Sub-Saharan Africa could reach China's current per-capita GDP within five to ten years of powerful AI. The implied growth rate is roughly 20% per annum---ten percentage points from AI-optimised decision-making across agriculture, healthcare and infrastructure, and ten from the diffusion of ASI-developed technologies that leapfrog decades of incremental development.
+But the remaining poverty is also the hardest to reach. Consider what it takes to lift a country out of poverty: simultaneously improve agriculture, healthcare, education, infrastructure, governance, trade, and financial systems---all of which interact with each other in complex, nonlinear ways. No human institution can optimize across all these dimensions at once. The World Bank, the IMF, and national governments make piecemeal interventions and hope the interactions are positive.
 
-This is ambitious. But consider the underlying economics. Goldman Sachs Research estimates that generative AI alone could raise global GDP by 7%, or nearly \$7trn, and lift productivity growth by 1.5 percentage points over a ten-year period. McKinsey's Global Institute projects that generative AI could add \$2.6trn to \$4.4trn annually---roughly the GDP of the United Kingdom. And these estimates concern current, narrow AI tools. Superintelligence is a different category of capability entirely.
+ASI could model entire economies at the level of individual agents, supply chains, and resource flows. It could design interventions that account for all the interactions. It could adapt in real time as conditions change.
 
-The [Federal Reserve Bank of St Louis's FRED database](https://fred.stlouisfed.org/series/OPHNFB) tracks American nonfarm business labour productivity (output per hour). The data show clear surges around previous technological waves---electrification in the 1920s, computing in the 1990s. Each general-purpose technology produced a step-change in output per unit of human effort. ASI would represent the most powerful general-purpose technology ever developed.
+Amodei's specific and striking prediction: **Sub-Saharan Africa could reach China's current per-capita GDP (~\$12,000--\$14,000) within 5--10 years of powerful AI**, up from approximately \$2,000 today ([World Bank data](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=ZG)).
+
+This implies ~20% annual GDP growth---roughly 10% from AI-optimized decision-making across agriculture, healthcare, and infrastructure, and 10% from the diffusion of ASI-developed technologies that bypass decades of incremental development.
+
+The underlying economics support the direction, if not the exact magnitude. [Goldman Sachs Research](https://www.goldmansachs.com/insights/topics/artificial-intelligence) estimates that generative AI alone could raise global GDP by 7%, or nearly \$7 trillion, and lift productivity growth by 1.5 percentage points over a ten-year period. [McKinsey Global Institute](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier) projects that generative AI could add \$2.6 trillion to \$4.4 trillion annually---roughly the GDP of the United Kingdom. And these estimates concern current, narrow AI. Superintelligence is a different category entirely.
+
+The [Federal Reserve Bank of St. Louis's FRED database](https://fred.stlouisfed.org/series/OPHNFB) tracks American nonfarm business labor productivity (output per hour). The data show clear surges around previous technological waves---electrification in the 1920s, computing in the 1990s. Each general-purpose technology produced a step-change in output per unit of human effort. ASI would represent the most powerful general-purpose technology ever developed.
 
 The long arc of GDP per capita tells the story most starkly:
 
@@ -128,15 +180,17 @@ The long arc of GDP per capita tells the story most starkly:
 
 <small>Source: [Our World in Data](https://ourworldindata.org/grapher/gdp-per-capita-maddison), drawing on the Maddison Project Database (2020).</small>
 
-For millennia, the line is nearly flat. Then, around 1800, it begins to rise---first slowly, then exponentially. Each inflection point corresponds to a general-purpose technology: the steam engine, electrification, the computer. ASI would be the next, and by far the most consequential. The question is whether the gains can be distributed broadly enough to lift the bottom as well as the top.
+For millennia, the line is nearly flat. Then, around 1800, it begins to rise---first slowly, then exponentially. Each inflection point corresponds to a general-purpose technology: the steam engine, electrification, the computer. ASI would be the next, and by far the most consequential.
+
+The result is not charity. It is the elimination of scarcity as the binding constraint on human flourishing.
 
 ---
 
-## Beyond Earth
+## Domain 5: Becoming a Multiplanetary Species
 
-Every serious existential-risk researcher agrees on one point: so long as humanity exists on a single planet, it remains one asteroid, one supervolcano or one engineered pandemic away from extinction. Geographic diversification is not a luxury. It is a survival requirement.
+Every serious existential risk researcher agrees on one thing: as long as humanity exists on a single planet, we are one asteroid, one supervolcano, or one engineered pandemic away from extinction. Geographic diversification is not optional for a species that wants to survive long-term.
 
-The barriers to becoming multiplanetary are almost entirely engineering problems: radiation shielding, closed-loop life support, in-situ resource utilisation, propulsion efficiency, and cost. On the last of these, the trajectory is already favourable. The Space Shuttle cost roughly \$54,500 per kilogramme to low Earth orbit. SpaceX's Falcon 9 brought that figure to approximately \$2,720. Starship aims to push it below \$100, according to [CSIS analysis of space launch costs](https://aerospace.csis.org/data/space-launch-to-low-earth-orbit-how-much-does-it-cost/).
+The barriers to Mars colonization and beyond are almost entirely engineering problems: radiation shielding, closed-loop life support, in-situ resource utilization, propulsion efficiency, and the sheer cost of launching mass out of Earth's gravity well. On cost, the trajectory is already remarkable:
 
 | Launch vehicle | Cost per kg to LEO |
 |---|---|
@@ -145,60 +199,71 @@ The barriers to becoming multiplanetary are almost entirely engineering problems
 | Falcon 9 | ~\$2,720 |
 | Starship (target) | <\$100 |
 
-<small>Sources: NASA, CSIS Aerospace Security Project.</small>
+<small>Sources: NASA, [CSIS Aerospace Security Project](https://aerospace.csis.org/data/space-launch-to-low-earth-orbit-how-much-does-it-cost/).</small>
 
-A three-order-of-magnitude cost reduction, achieved largely through reusability and iterative engineering. Now imagine a superintelligent system applied to the remaining problems: designing novel propulsion systems unconstrained by the Tsiolkovsky equation's brutal arithmetic, solving closed-loop life support as a systems-biology problem of extraordinary complexity, and optimising self-replicating manufacturing for lunar and Martian bases.
+A three-order-of-magnitude cost reduction, achieved largely through reusability and iterative engineering.
 
-Max Tegmark's concept of "cosmic endowment" captures the stakes with appropriate sobriety: if humanity survives and spreads, the amount of consciousness, discovery and meaning that could exist over billions of years across billions of star systems is not merely large. It is a different category of value altogether.
+ASI could:
 
----
+- **Design novel propulsion systems.** Current chemical rockets are fundamentally limited by the Tsiolkovsky equation. Nuclear thermal, nuclear electric, and more exotic propulsion concepts require materials science and engineering optimization beyond current human capability
+- **Solve closed-loop life support.** Maintaining a biosphere in a tin can requires understanding every interaction between plants, microbes, water, air, and human metabolism. This is a systems biology problem of extraordinary complexity
+- **Design self-replicating manufacturing systems.** Von Neumann probes---self-replicating spacecraft that can build copies of themselves from raw materials---could spread through the Milky Way in ~500,000 years at 0.1c. Designing the first one is an engineering challenge that requires solving robotics, materials science, and AI simultaneously
+- **Optimize orbital mechanics and mission planning.** Finding optimal trajectories through the solar system's gravitational landscape is a problem that scales combinatorially with the number of destinations and constraints
 
-## The questions that remain
-
-Beyond the engineering lie the questions that are not engineering problems at all.
-
-**Consciousness.** There is no satisfactory explanation for why subjective experience exists---why there is, in Thomas Nagel's formulation, "something it is like" to be a brain processing information. A superintelligent system, particularly one that might itself possess some form of consciousness, could approach this problem from angles unavailable to human neuroscience or philosophy.
-
-**The origin of the universe.** Why is there something rather than nothing? Why these physical constants and not others? These questions sit at the intersection of physics, mathematics and philosophy. They may not have answers. But if they do, a system operating far beyond the boundary of human cognition is the most plausible route to finding them.
-
-**The nature of mathematics itself.** Is mathematics discovered or invented? A system capable of proving theorems that no human can even state would bring a unique perspective to this ancient question.
-
-None of this is guaranteed. Some questions may be unanswerable in principle. But the history of science is a record of questions that seemed permanently beyond reach until someone with the right tools asked them in the right way.
+Max Tegmark's concept of **cosmic endowment** captures the stakes: if humanity survives and spreads, the amount of *experience*---of consciousness, joy, discovery, meaning---that could exist over billions of years across billions of star systems is incomprehensibly vast. The difference between "humanity goes extinct in the next century" and "humanity flourishes for a billion years across the galaxy" is not a quantitative difference. It is a difference in kind.
 
 ---
 
-## The binding constraint: governance
+## Domain 6: The Fundamental Questions
 
-If the preceding sections paint an overly rosy picture, here is the corrective.
+And then there are the questions that are not engineering problems at all.
 
-Intelligence is necessary but not sufficient. Even a perfectly aligned ASI cannot compel humans to adopt its recommendations. It cannot override political systems, cultural resistance or institutional inertia---not, at any rate, if it is truly aligned with human values and respects human autonomy.
+**Consciousness.** We do not understand why subjective experience exists. We cannot explain why there is "something it is like" to be a brain processing information. This is the hard problem of consciousness, and it has resisted every attempt at solution since Descartes. A superintelligent system---especially one that may itself be conscious, or may be able to create systems of varying degrees of consciousness---could approach this problem from an angle that no human philosopher or neuroscientist has considered.
 
-The most probable failure mode for the optimistic scenario is not technical but **distributional**. An ASI could develop a cure for cancer, but if the cure is proprietary and costs \$2m per treatment, most of humanity will not benefit. An ASI could optimise agriculture to eliminate hunger, but if its recommendations require political changes that incumbents resist, the status quo will persist.
+**The origin of the universe.** Why is there something rather than nothing? Why these physical constants and not others? Are there other universes? These questions sit at the intersection of physics, mathematics, and philosophy. They may not have answers. But if they do, ASI is how we find them.
 
-The International Monetary Fund has [warned](https://www.imf.org/en/Blogs/Articles/2024/01/14/ai-will-transform-the-global-economy-lets-make-sure-it-benefits-humanity) that AI could widen the gap between rich and poor nations if the benefits concentrate in countries with existing AI infrastructure and talent. This is not a hypothetical. It is the default trajectory.
+**The nature of mathematics.** Is mathematics discovered or invented? Does the Platonic realm exist independently of minds? A system that can prove theorems humans cannot even state might have a unique perspective on this ancient question.
 
-Solving this requires something no superintelligence can provide: political will. It requires international co-ordination, regulatory frameworks, and a shared commitment to distributing the benefits broadly. The alignment problem, properly understood, has a political dimension that no amount of technical brilliance can address.
-
-Mr Amodei's framing is honest on this point: the role of AI is to "turbocharge" the efforts of people who want to help. The people and the institutions still have to want it.
+I am not claiming ASI will answer all of these. Some may be unanswerable in principle. But the history of science is the history of questions that seemed unanswerable until someone with the right tools and the right intelligence asked them in the right way.
 
 ---
 
-## What success looks like
+## The Bottleneck That Remains: Governance
 
-The alignment-research community has spent two decades thinking about how to prevent ASI from destroying humanity. This work is essential and underfunded. But it has produced a discourse in which the positive vision---the thing the field is trying to achieve, not merely the catastrophe it is trying to avert---remains vague and underspecified.
+If I have painted an overly rosy picture, here is the corrective.
 
-"Human flourishing" is not a specification. "Aligned with human values" is not a blueprint. If the most powerful technology in history is to be built, there ought to be some concrete accounting of what success looks like.
+Intelligence is necessary but not sufficient. Even a perfectly aligned ASI cannot force humans to adopt its recommendations. It cannot override political systems, cultural resistance, or institutional inertia---not if it is truly aligned with human values and respects human autonomy.
 
-Here, then, is one such accounting. Within 20 years of an aligned ASI:
+The most likely failure mode for the optimistic scenario is not technical. It is **distributional**. ASI could cure cancer, but if the cure is proprietary and costs \$2 million per treatment, most humans will not benefit. ASI could end poverty, but if its economic recommendations require political changes that incumbents resist, the status quo will persist.
 
-1. **No human dies involuntarily of disease or ageing.** Death by accident or choice persists, but the biological lottery is over
+The [International Monetary Fund has warned](https://www.imf.org/en/Blogs/Articles/2024/01/14/ai-will-transform-the-global-economy-lets-make-sure-it-benefits-humanity) that AI could widen the gap between rich and poor nations if the benefits concentrate in countries with existing AI infrastructure and talent. This is not a hypothetical---it is the default trajectory.
+
+Solving this requires something ASI cannot provide: political will. It requires international coordination, regulatory frameworks, and a shared commitment to distributing the benefits of superintelligence broadly. The alignment problem has a political dimension that no amount of technical work can address.
+
+Amodei's framing is honest here: the role of AI is to "turbocharge" the efforts of people who want to help. The people and the institutions still have to want it.
+
+---
+
+## What Are We Aligning Toward?
+
+Let me return to the question I started with.
+
+The alignment research community has spent two decades thinking about how to prevent ASI from destroying humanity. This work is essential and underfunded. But it has created a discourse where the *positive* vision---the thing we are trying to *achieve*, not just the thing we are trying to *avoid*---remains vague and underspecified.
+
+"Human flourishing" is not a specification. "Aligned with human values" is not a blueprint. If we are going to build the most powerful technology in human history, we need a concrete, detailed, quantified vision of what success looks like.
+
+Here is mine:
+
+Within 20 years of aligned ASI:
+
+1. **No human dies involuntarily of disease or aging.** Death from accident or choice remains, but the biological lottery is over
 2. **Energy is abundant and clean.** Fusion or advanced solar provides effectively unlimited power at negligible marginal cost
-3. **Extreme poverty is eliminated.** Every human has access to food, shelter, healthcare, education and meaningful occupation
-4. **Humanity has a permanent presence beyond Earth.** Self-sustaining settlements on the Moon and Mars, at minimum
-5. **The fundamental laws of physics are understood.** A unified theory of quantum gravity, and the technologies that follow from it
-6. **Superintelligent assistance is universally accessible.** Not as a luxury, but as a basic entitlement---like literacy or clean water
+3. **Poverty is eliminated.** Every human has access to food, shelter, healthcare, education, and meaningful work or purpose
+4. **We have a permanent presence beyond Earth.** At minimum, self-sustaining settlements on the Moon and Mars
+5. **We understand the fundamental laws of physics.** A unified theory of quantum gravity, and the beginning of technologies that exploit it
+6. **Every human has access to superintelligent assistance.** Not as a luxury, but as a basic right---like literacy or clean water
 
-This is not utopia. Humans will still quarrel, compete, err, grieve and find new problems to worry about. The human condition is not "solved" by ASI any more than it was solved by antibiotics or electric light. But the floor---the minimum quality of life available to any human being---rises to a level that would be unrecognisable to anyone alive today.
+This is not utopia. Humans will still argue, compete, create, suffer heartbreak, make bad decisions, and find new problems to worry about. The human condition is not "solved" by ASI any more than it was "solved" by antibiotics or electricity. But the *floor*---the minimum quality of life available to any human---rises to a level that would be unrecognizable to anyone alive today.
 
 The child mortality chart tells the story of what is already possible when knowledge compounds:
 
@@ -206,17 +271,17 @@ The child mortality chart tells the story of what is already possible when knowl
 
 <small>Source: [Our World in Data](https://ourworldindata.org/grapher/child-mortality), drawing on UN IGME data.</small>
 
-From over 200 deaths per 1,000 live births in 1950 to roughly 37 today. That curve was bent by human intelligence operating with limited tools. The question before the species is what happens when the tools become, for the first time, more intelligent than their makers.
+From over 200 deaths per 1,000 live births in 1950 to roughly 37 today. That curve was bent by human intelligence operating with limited tools. The question before us is what happens when the tools become, for the first time, more intelligent than their makers.
 
-Bostrom's *Letter from Utopia* ends with a passage that deserves wider circulation:
+Nick Bostrom's *Letter from Utopia* ends with a line that has stayed with me for years:
 
 > "We love life here every instant. Every second is so good that it would blow your mind had its goodness not also been increased. My contemporaries and I bear witness, and all of history is on our side: the world can be much, much better than you ever dreamed."
 
-The pessimists may well be right that the default outcome of superintelligence is catastrophic. But the optimists are right that the achievable outcome is magnificent. The alignment problem is not an argument for stopping. It is an argument for building carefully---because what is being built toward is worth getting right.
+The pessimists may be right that the default outcome is catastrophic. But the optimists are right that the *achievable* outcome is magnificent. The alignment problem is not a reason to stop building. It is a reason to build *carefully*---because what we are building toward is worth getting right.
 
 ---
 
-## Further reading
+## Further Reading
 
 - Dario Amodei, [*Machines of Loving Grace*](https://darioamodei.com/essay/machines-of-loving-grace) (2024)
 - Sam Altman, [*The Intelligence Age*](https://ia.samaltman.com/) (2024)
@@ -225,7 +290,7 @@ The pessimists may well be right that the default outcome of superintelligence i
 - David Deutsch, *The Beginning of Infinity* (2011)
 - Toby Ord, *The Precipice* (2020)
 - Leopold Aschenbrenner, [*Situational Awareness*](https://situational-awareness.ai/) (2024)
-- Federal Reserve Bank of St Louis, [FRED: Nonfarm Business Labour Productivity](https://fred.stlouisfed.org/series/OPHNFB)
+- Federal Reserve Bank of St. Louis, [FRED: Nonfarm Business Labor Productivity](https://fred.stlouisfed.org/series/OPHNFB)
 - World Bank, [Poverty and Inequality Platform](https://pip.worldbank.org/)
 - IRENA, [Renewable Power Generation Costs](https://www.irena.org/costs)
 - Goldman Sachs, [Generative AI and the Global Economy](https://www.goldmansachs.com/insights/topics/artificial-intelligence)
