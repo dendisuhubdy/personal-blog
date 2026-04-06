@@ -42,13 +42,13 @@ Dario Amodei, CEO of Anthropic, offered the most useful framework for thinking a
 
 This is not magic. It is the straightforward consequence of what happens when you have millions of copies of Nobel-caliber researchers working 10--100x human speed, 24 hours a day, 365 days a year, across every scientific discipline simultaneously. Each copy can read every paper ever published, hold the entirety of a field's knowledge in working memory, and design experiments with perfect recall of every prior result.
 
-The key insight is that intelligence is currently the bottleneck for most scientific progress. Not funding, not motivation, not data---*intelligence*. The number of humans capable of making fundamental breakthroughs in any given field is measured in the dozens. ASI removes that bottleneck.
+The key insight---and it is a debatable one---is that intelligence may be the binding constraint on much of scientific progress. Not funding, not motivation, not data, but the sheer scarcity of minds capable of making fundamental breakthroughs in any given field. If that is true, or even partially true, ASI loosens the bottleneck considerably.
 
 But Amodei also introduces an important corrective: the concept of **marginal returns to intelligence**. In some domains, progress is bottlenecked not by intelligence but by irreducible physical constraints. Clinical trials take years because biology runs on biological time. Particle physics experiments require building new accelerators. Sociology requires observing human behavior across decades.
 
 So the right question is not "what can superintelligence solve?" but rather: **"In which domains does intelligence, not time or data, constitute the binding constraint?"**
 
-The answer turns out to be: most of the ones that matter.
+The answer, if this framework holds, may be: most of the ones that matter.
 
 ---
 
@@ -110,15 +110,15 @@ The price of a solar module has fallen from roughly \$106 per watt in 1976 to un
 
 Yet even these gains were achieved without superintelligent optimization of the underlying materials science, grid architecture, or storage chemistry.
 
-**Nuclear fusion** has been "30 years away" for 60 years. The reason is not that fusion is physically impossible---the sun does it continuously. The reason is that controlling plasma at 150 million degrees involves a staggering number of interacting variables: turbulence, instabilities, magnetic field geometry, materials degradation. The parameter space is too large for human intuition and too complex for brute-force simulation.
+**Nuclear fusion** has been "30 years away" for 60 years. The reason is not that fusion is physically impossible---the sun does it continuously. The reason is that controlling plasma at 150 million degrees involves a staggering number of interacting variables: turbulence, instabilities, magnetic field geometry, materials degradation. The parameter space appears to be too large for unaided human intuition and too complex for brute-force simulation with current hardware.
 
-This is precisely the kind of problem where ASI excels.
+This is the kind of problem where ASI could plausibly excel.
 
 AI is already making inroads. Princeton's **STELLAR-AI** program is using machine learning to accelerate fusion plasma simulations. MIT researchers used AI to predict and prevent plasma disruptions in real time. DeepMind's techniques for controlling plasma shape in tokamaks demonstrated that machine learning can handle the multi-dimensional control problem that has stymied physicists for decades.
 
 An ASI could go further: design entirely new reactor geometries, discover novel plasma confinement strategies, solve the materials science problems (what do you build a wall out of when the thing touching it is hotter than the sun?), and optimize the engineering for mass production.
 
-The end state is energy that is effectively too cheap to meter. Not free---infrastructure costs exist---but cheap enough that the cost of energy ceases to be a meaningful constraint on what humanity can do.
+The plausible end state is energy that approaches being too cheap to meter. Not free---infrastructure costs exist---but potentially cheap enough that the cost of energy ceases to be a meaningful constraint on what humanity can do.
 
 ---
 
@@ -128,9 +128,9 @@ This is the domain I find most intellectually exciting, and the one where existi
 
 Fundamental physics has been stuck for roughly 50 years. The Standard Model was completed in the 1970s. String theory has produced no testable predictions in four decades. We have no quantum theory of gravity. We do not understand dark matter or dark energy, which together constitute 95% of the universe's mass-energy content. The last major theoretical breakthrough---the Higgs mechanism---was proposed in 1964 and confirmed experimentally in 2012.
 
-Why the stagnation? Several reasons, but a key one is that the mathematics required to make progress has exceeded human cognitive capacity. The equations governing quantum gravity involve mathematical structures---higher-dimensional topology, nonperturbative effects in quantum field theory, the landscape of string vacua---that no human can hold in working memory simultaneously.
+Why the stagnation? Several reasons: insufficient experimental data at the relevant energy scales, the difficulty of building new accelerators, and---perhaps---that the mathematics required to make further progress has grown extraordinarily complex. The equations governing quantum gravity involve mathematical structures---higher-dimensional topology, nonperturbative effects in quantum field theory, the landscape of string vacua---that are difficult for any individual human to hold in working memory simultaneously. Whether this reflects a hard limit on human cognition or merely a tooling problem is an open question.
 
-ASI changes this calculus entirely.
+If it is even partly a tooling problem, ASI changes the calculus significantly.
 
 A superintelligent system could:
 
@@ -144,15 +144,15 @@ In mathematics, the trajectory is already clear:
 - AI models achieved **gold-medal performance at the 2025 International Mathematical Olympiad**
 - Terence Tao, arguably the world's greatest living mathematician, has said AI's immediate value is in handling "the thousand small cases that are conceptually straightforward but too time-consuming" for humans
 
-The Millennium Prize Problems---the Riemann Hypothesis, P vs NP, the Navier-Stokes existence and smoothness problem, and others---represent the outer frontier of human mathematical capability. A system operating many orders of magnitude beyond human mathematical reasoning could potentially resolve all of them. And beyond the Millennium Problems lie questions we have not yet had the intelligence to formulate.
+The Millennium Prize Problems---the Riemann Hypothesis, P vs NP, the Navier-Stokes existence and smoothness problem, and others---represent the outer frontier of human mathematical capability. A system operating well beyond current human mathematical reasoning might resolve some or all of them. And beyond the Millennium Problems may lie questions we have not yet had the tools to formulate.
 
-David Deutsch captures this in his *Principle of Optimism*: "All evils are caused by insufficient knowledge." If every problem that is interesting is also soluble given sufficient knowledge, then ASI---as a knowledge-generating system of unprecedented power---could solve every soluble problem.
+David Deutsch captures this in his *Principle of Optimism*: "All evils are caused by insufficient knowledge." If every problem that is interesting is also soluble given sufficient knowledge, then ASI---as a knowledge-generating system of potentially unprecedented power---would be the best tool we have ever had for tackling them.
 
 ---
 
 ## Domain 4: Ending Poverty in a Decade
 
-Global poverty is often framed as a resource problem or a political problem. It is both. But it is also, fundamentally, an optimization problem operating at a scale that exceeds human institutional capacity.
+Global poverty is often framed as a resource problem or a political problem. It is both. But it is also, in part, a coordination and optimization problem operating at a scale that strains human institutional capacity.
 
 The share of the world's population living in extreme poverty has already fallen at a pace that would have astonished any observer two centuries ago:
 
@@ -172,7 +172,7 @@ This implies ~20% annual GDP growth---roughly 10% from AI-optimized decision-mak
 
 The underlying economics support the direction, if not the exact magnitude. [Goldman Sachs Research](https://www.goldmansachs.com/insights/topics/artificial-intelligence) estimates that generative AI alone could raise global GDP by 7%, or nearly \$7 trillion, and lift productivity growth by 1.5 percentage points over a ten-year period. [McKinsey Global Institute](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier) projects that generative AI could add \$2.6 trillion to \$4.4 trillion annually---roughly the GDP of the United Kingdom. And these estimates concern current, narrow AI. Superintelligence is a different category entirely.
 
-The [Federal Reserve Bank of St. Louis's FRED database](https://fred.stlouisfed.org/series/OPHNFB) tracks American nonfarm business labor productivity (output per hour). The data show clear surges around previous technological waves---electrification in the 1920s, computing in the 1990s. Each general-purpose technology produced a step-change in output per unit of human effort. ASI would represent the most powerful general-purpose technology ever developed.
+The [Federal Reserve Bank of St. Louis's FRED database](https://fred.stlouisfed.org/series/OPHNFB) tracks American nonfarm business labor productivity (output per hour). The data show clear surges around previous technological waves---electrification in the 1920s, computing in the 1990s. Each general-purpose technology produced a step-change in output per unit of human effort. ASI would arguably represent the most powerful general-purpose technology ever developed.
 
 The long arc of GDP per capita tells the story most starkly:
 
@@ -205,7 +205,7 @@ A three-order-of-magnitude cost reduction, achieved largely through reusability 
 
 ASI could:
 
-- **Design novel propulsion systems.** Current chemical rockets are fundamentally limited by the Tsiolkovsky equation. Nuclear thermal, nuclear electric, and more exotic propulsion concepts require materials science and engineering optimization beyond current human capability
+- **Design novel propulsion systems.** Current chemical rockets are fundamentally limited by the Tsiolkovsky equation. Nuclear thermal, nuclear electric, and more exotic propulsion concepts involve materials science and engineering challenges that have so far resisted conventional approaches
 - **Solve closed-loop life support.** Maintaining a biosphere in a tin can requires understanding every interaction between plants, microbes, water, air, and human metabolism. This is a systems biology problem of extraordinary complexity
 - **Design self-replicating manufacturing systems.** Von Neumann probes---self-replicating spacecraft that can build copies of themselves from raw materials---could spread through the Milky Way in ~500,000 years at 0.1c. Designing the first one is an engineering challenge that requires solving robotics, materials science, and AI simultaneously
 - **Optimize orbital mechanics and mission planning.** Finding optimal trajectories through the solar system's gravitational landscape is a problem that scales combinatorially with the number of destinations and constraints
@@ -218,7 +218,7 @@ Max Tegmark's concept of **cosmic endowment** captures the stakes: if humanity s
 
 And then there are the questions that are not engineering problems at all.
 
-**Consciousness.** We do not understand why subjective experience exists. We cannot explain why there is "something it is like" to be a brain processing information. This is the hard problem of consciousness, and it has resisted every attempt at solution since Descartes. A superintelligent system---especially one that may itself be conscious, or may be able to create systems of varying degrees of consciousness---could approach this problem from an angle that no human philosopher or neuroscientist has considered.
+**Consciousness.** We do not understand why subjective experience exists. We cannot explain why there is "something it is like" to be a brain processing information. This is the hard problem of consciousness, and it has resisted every attempt at solution since Descartes. A superintelligent system---especially one that may itself be conscious, or may be able to create systems of varying degrees of consciousness---could approach this problem from angles that are difficult for human philosophers or neuroscientists to explore given current tools.
 
 **The origin of the universe.** Why is there something rather than nothing? Why these physical constants and not others? Are there other universes? These questions sit at the intersection of physics, mathematics, and philosophy. They may not have answers. But if they do, ASI is how we find them.
 
