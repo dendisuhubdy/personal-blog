@@ -214,20 +214,6 @@ Max Tegmark's concept of **cosmic endowment** captures the stakes: if humanity s
 
 ---
 
-## Domain 6: The Fundamental Questions
-
-And then there are the questions that are not engineering problems at all.
-
-**Consciousness.** We do not understand why subjective experience exists. We cannot explain why there is "something it is like" to be a brain processing information. This is the hard problem of consciousness, and it has resisted every attempt at solution since Descartes. A superintelligent system---especially one that may itself be conscious, or may be able to create systems of varying degrees of consciousness---could approach this problem from angles that are difficult for human philosophers or neuroscientists to explore given current tools.
-
-**The origin of the universe.** Why is there something rather than nothing? Why these physical constants and not others? Are there other universes? These questions sit at the intersection of physics, mathematics, and philosophy. They may not have answers. But if they do, ASI is how we find them.
-
-**The nature of mathematics.** Is mathematics discovered or invented? Does the Platonic realm exist independently of minds? A system that can prove theorems humans cannot even state might have a unique perspective on this ancient question.
-
-I am not claiming ASI will answer all of these. Some may be unanswerable in principle. But the history of science is the history of questions that seemed unanswerable until someone with the right tools and the right intelligence asked them in the right way.
-
----
-
 ## The Bottleneck That Remains: Governance
 
 If I have painted an overly rosy picture, here is the corrective.
