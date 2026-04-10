@@ -1,7 +1,7 @@
 ---
 title: "Fundraising Across the Globe: What Nobody Tells You"
 author: Dendi Suhubdy
-pubDatetime: 2026-04-11T00:00:00Z
+pubDatetime: 2026-04-10T12:00:00Z
 featured: false
 draft: false
 tags:
