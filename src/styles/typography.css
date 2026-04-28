@@ -89,6 +89,18 @@
     pre {
       @apply focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-dashed;
     }
+
+    .katex-display {
+      @apply max-w-full overflow-x-auto overflow-y-hidden py-1;
+    }
+
+    .katex-display > .katex {
+      @apply text-left whitespace-normal;
+    }
+
+    :not(.katex-display) > .katex {
+      @apply max-w-full inline-block align-middle overflow-x-auto overflow-y-hidden;
+    }
   }
 
   /* ===== Code Blocks & Syntax Highlighting ===== */
