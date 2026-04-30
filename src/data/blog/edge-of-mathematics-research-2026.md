@@ -1,7 +1,7 @@
 ---
 title: "The Edge of Mathematics Research: A Citation-Grounded Survey of Open Problems and Recent Breakthroughs (2019–2026)"
 author: Dendi Suhubdy
-pubDatetime: 2026-05-01T12:00:00Z
+pubDatetime: 2026-04-30T22:00:00Z
 featured: false
 draft: false
 tags:
