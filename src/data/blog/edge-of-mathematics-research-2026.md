@@ -167,12 +167,17 @@ The Millennium problem — global existence and smoothness for 3D incompressible
 
 The Boltzmann equation's **regularity for the non-cutoff case** has progressed (Imbert–Mouhot–Silvestre). **Hairer's regularity structures** for SPDEs ([Inventiones 2014](https://arxiv.org/abs/1303.5113)) — Fields Medal 2014 — established a unified framework for singular SPDEs that has continued to expand (Bruned–Chandra–Chevyrev–Hairer for renormalization).
 
+### General relativity: Kerr stability
+
+The **nonlinear stability of slowly rotating Kerr black holes** ([Klainerman–Szeftel, three-paper series 2021–2023](https://arxiv.org/abs/2104.11857), with [Giorgi–Klainerman–Szeftel for the linear case](https://arxiv.org/abs/2205.14808)) is one of the monumental PDE results of the decade — roughly 2000 pages establishing that small perturbations of a Kerr metric with $|a|/M$ small enough decay back to a nearby Kerr solution. Independently, **Dafermos–Holzegel–Rodnianski–Taylor** have an alternative program for the same problem ([arxiv 2021](https://arxiv.org/abs/2104.08222)). The full subextremal range $|a| < M$ remains open, as does **Penrose's strong cosmic censorship** in full generality.
+
 ### What's truly open
 
 - **Navier–Stokes (Millennium)**.
 - **Yang–Mills mass gap (Millennium)** — see §13.
 - **De Giorgi conjecture** in dimension ≥ 9 (open since 1978; settled in dim ≤ 8 by Savin and del Pino–Kowalczyk–Wei).
 - **Regularity for the harmonic map heat flow** in higher target dimension.
+- **Kerr stability for the full subextremal range** $|a| < M$, and **Penrose's strong cosmic censorship**.
 
 ---
 
@@ -191,6 +196,10 @@ The **Kardar–Parisi–Zhang equation** and its universality class — the conj
 ### Random matrices and spin glasses
 
 **Talagrand's Abel Prize (2024)** was for spin glasses, concentration inequalities, and stochastic processes. The Parisi formula was proven by **Panchenko** ([Annals 2013](https://arxiv.org/abs/1112.4409)), and **Auffinger–Chen–Sellke** continue to push the structure of the Parisi solution.
+
+### Phase transitions and statistical mechanics
+
+**Duminil-Copin's Fields Medal (2022)** recognized a decade of work on phase transitions in lattice models — the central program in rigorous statistical mechanics. Highlights include the proof of **sharpness of the phase transition** for Bernoulli percolation and the random cluster model in arbitrary dimension ([Duminil-Copin–Tassion, CMP 2016](https://arxiv.org/abs/1502.03050)), the **continuity of the phase transition for $q \leq 4$** in the planar random cluster model ([Duminil-Copin–Sidoravicius–Tassion, Annals 2017](https://arxiv.org/abs/1505.04159)), and — most strikingly — the proof with **Aizenman that $\phi^4_4$ is trivial** ([Annals 2021](https://arxiv.org/abs/1912.07973)). The triviality result settled a 40-year question and dashed hopes that the lattice $\phi^4$ in four dimensions would converge to a non-Gaussian QFT, with consequences for what rigorous constructive QFT can hope to achieve.
 
 ### Lattice gauge theory
 
@@ -270,6 +279,10 @@ Representation theory is downstream of, and feeding into, the Langlands program 
 ### Modular representation theory and the local Langlands
 
 **Fargues–Scholze's geometrization of local Langlands** ([2021, arxiv](https://arxiv.org/abs/2102.13459), 350 pages) constructs the local Langlands correspondence for any reductive group over a local field as a sheaf on $\text{Bun}_G$ on the Fargues–Fontaine curve. This is the most foundational result in p-adic representation theory in twenty years.
+
+### Relative Langlands duality
+
+The most important new conceptual framework in the Langlands program since the geometric correspondence itself is the **relative Langlands duality** of [Ben-Zvi–Sakellaridis–Venkatesh ("Relative Langlands Duality", 2024, arxiv, ~450 pages)](https://arxiv.org/abs/2409.04677). The framework reorganizes period integrals (the Sakellaridis–Venkatesh program for spherical varieties) and L-values into a duality between **Hamiltonian** spaces for a group $G$ and Hamiltonian spaces for its Langlands dual $\check G$, parallel to the symplectic duality / 3D mirror symmetry observed by physicists. This unifies a vast set of previously ad hoc relations between automorphic periods and special values of L-functions, and points toward a "physical Langlands" formulation.
 
 ### What's truly open
 
@@ -385,9 +398,37 @@ This is the meta-frontier. As of 2026, formalization is no longer a curiosity �
 
 The active push: formalizing **Fermat's Last Theorem** (Buzzard's program, ongoing), formalizing the **Brauer–Nesbitt theorem and modularity lifting** (Buzzard–Commelin), and integrating **AI-assisted tactic suggestion** (LeanDojo, Llemma, AlphaProof, AlphaGeometry).
 
+### Coq/Rocq, Isabelle, and the broader ecosystem
+
+Lean dominates the contemporary narrative because mathlib's social structure (a single, monotonically growing, mathematician-curated library) matches how research mathematics is organized. But the formalization ecosystem is much older than Lean's mathlib and remains active in other systems.
+
+**Coq** (recently renamed **Rocq**) hosts the most consequential formalization of the pre-Lean era: the **Feit–Thompson odd-order theorem** ([Gonthier et al., 2012](https://hal.inria.fr/hal-00816699), 170,000 lines), proving that every finite group of odd order is solvable. The Coq mathematical components library (SSReflect-based) was the methodological precursor that mathlib later absorbed and scaled. Coq remains the dominant system in **programming-language semantics** and **CompCert**-style verified compilers, where Lean has yet to make inroads.
+
+**Isabelle/HOL** and its **Archive of Formal Proofs** (~1000 entries, ~3M lines as of 2026) host classical-mathematics formalizations of remarkable depth — the **prime number theorem**, large parts of **complex analysis** and **measure theory**, and **Gödel's incompleteness theorems**. Isabelle's Sledgehammer tool, which delegates to external SMT solvers and ATPs, is still the gold standard for "press a button and a proof appears" automation that Lean tooling has not matched.
+
+The takeaway: when people say "formalization is taking off," they often mean *Lean is taking off in research mathematics*. Coq/Rocq and Isabelle remain dominant in adjacent areas (verified software, classical analysis), and the long-run question is whether the ecosystems consolidate, fragment further, or interoperate via shared logical foundations.
+
+### Autoformalization
+
+A distinct AI-for-math program is **autoformalization** — using language models to translate informal LaTeX mathematics into formal proof-assistant code. **Wu et al. ("Autoformalization with Large Language Models", NeurIPS 2022)** ([arxiv](https://arxiv.org/abs/2205.12615)) demonstrated that few-shot prompting could produce usable Isabelle/HOL statements directly from natural-language theorem statements. **Jiang et al. ("Draft, Sketch, and Prove", ICLR 2023)** ([arxiv](https://arxiv.org/abs/2210.12283)) extended this from statements to *proofs* by having the model produce a draft proof in natural language, sketch it formally, and dispatch atomic steps to Sledgehammer.
+
+Autoformalization is a different problem from proof search. Proof search asks: given a formal goal, find a formal proof. Autoformalization asks: given the *informal mathematical literature* — three centuries of LaTeX, textbooks, and arxiv preprints — translate it into formal libraries fast enough to keep pace with new research. If autoformalization works at scale, the bottleneck on formal mathematics shifts from "writing formal proofs" to "checking that the formal statements faithfully encode the informal ones." That is a much friendlier bottleneck.
+
 ### AI-assisted proof discovery
 
-**DeepMind's AlphaProof and AlphaGeometry 2** ([2024 IMO silver-medal performance](https://deepmind.google/discover/blog/ai-solves-imo-problems-at-silver-medal-level/)) is the headline. The substrate is reinforcement learning over Lean, plus geometric search. As of 2026, top systems are at the level of **strong IMO contestants**, not yet at the level of research mathematicians — but the gap is narrowing on a timescale of months, not years.
+**DeepMind's AlphaProof and AlphaGeometry 2** ([2024 IMO silver-medal performance](https://deepmind.google/discover/blog/ai-solves-imo-problems-at-silver-medal-level/)) is the headline. The architecture matters because it shows where the bottleneck actually sits. AlphaProof is a fine-tuned **Gemini** model that proposes Lean tactics, with a Lean kernel verifying each step and a tree-search procedure (closer to AlphaZero than to plain RL) that prunes the search space using value estimates from self-play. It is not "RL over Lean" in the sense of model-free policy gradient; it is search-augmented inference in which the model proposes and the kernel disposes.
+
+The reason this distinction matters: as of 2026, the bottleneck for AlphaProof on IMO-class problems is not the proposer's mathematical taste — it is **search efficiency**. The model has high-quality candidate steps; what the system needs is to explore the proof tree faster than $b^d$ for non-trivial branching factor $b$ and depth $d$. This is the same bottleneck that shaped AlphaGo and AlphaZero, and it is the reason the most likely near-term gains come from better verifiers, better value functions, and learned heuristics — not from larger models per se.
+
+As of 2026, top systems are at the level of **strong IMO contestants**, not yet at the level of research mathematicians — but the gap is narrowing on a timescale of months, not years.
+
+### The sociological question
+
+The technical questions about formalization are mostly settled (it works; it scales; mathlib will keep growing). The unsettled questions are sociological:
+
+- **Will journals require formal proofs?** *Annals* will not, in the near term. But *Journal of Formalized Reasoning* exists, and the precedent of the **Liquid Tensor Experiment** — where Scholze publicly stated he would treat the formalization as part of the proof's trustworthiness — has made it acceptable for high-status mathematicians to demand formalization of results they doubt. The natural endpoint is a two-tier system: formalized results carry an additional certification, and journals begin to flag which submissions have been verified.
+- **Will it change credit assignment?** Currently, the formalizer of someone else's theorem gets a fraction of the credit the original prover got. As autoformalization scales, this fraction may go to zero (formalizing becomes routine), which changes the incentives for whether anyone bothers. Alternatively, formalizing a *false* or *gappy* proof becomes the high-status activity — the formalizer who finds the gap in a famous proof gets the credit for a mistake correction.
+- **Will it change what counts as a proof?** The conservative answer: no, because mathematicians have always treated proof as a social process and formalization is just one more form of social check. The radical answer: yes, because once formalization is cheap, the *expectation* shifts — and a proof that resists formalization (Mochizuki's IUT being the obvious test case) starts to look not just unverified but unverifiable.
 
 The open question for the field: **what does mathematical research look like when proof checking is free, proof search is cheap, and the expensive resource is taste?** The honest answer is that nobody knows yet.
 
@@ -403,6 +444,23 @@ I have left out:
 
 Each of these would be a separate post.
 
+## What didn't move
+
+The narrative above is one of fusion and acceleration. That narrative is honest but partial. The honest counterweight is that several of the field's defining open problems are **as open in 2026 as they were in 2019**, and the absence of progress is itself diagnostic.
+
+- **The Riemann Hypothesis** — no plausible attack vector. The Bombieri–Lagarias and de Bruijn–Newman programs have not produced a path. The conjecture's connection to random matrix theory (Montgomery–Odlyzko) is suggestive but has not become an attack. RH is genuinely stuck.
+- **P vs NP** — every plausible technique (relativization, algebrization, natural proofs, geometric complexity theory) has been ruled out as a self-contained route. Mulmuley's GCT program produced beautiful representation theory but no separation. The lower-bound community has settled into the view that this problem may simply not be solvable with current tools.
+- **Yang–Mills existence and mass gap** — Chatterjee's lattice work is real progress but is many steps short of the continuum theory. The fact that $\phi^4_4$ turned out to be trivial (Aizenman–Duminil-Copin) was a *negative* result for naive constructive approaches.
+- **Navier–Stokes regularity (Millennium)** — Tao's averaged blowup and Buckmaster–Vicol's non-uniqueness suggest the smooth solutions formulation may be genuinely false, but a counterexample for the actual equation is no closer than it was a decade ago.
+- **The smooth 4-dimensional Poincaré conjecture** — every candidate counterexample has been killed; no positive proof technique exists. This problem is the textbook example of a question with neither attack nor counterexample after 40 years.
+- **The Hodge conjecture (Millennium)** — partial in low degree, no plausible route in general.
+- **The Birch–Swinnerton-Dyer conjecture (Millennium)** — Smith's Goldfeld result is real but the full conjecture remains essentially untouched in most ranks.
+- **The abc conjecture** — functionally still open, and the Mochizuki saga is a sociological cautionary tale rather than a mathematical advance.
+
+The structural reason these specific problems remain stuck is consistent across the list: they all require either an **entirely new framework** (RH and the Langlands group; P vs NP and circuit complexity) or a **deep regularity result that the existing PDE toolkit cannot reach** (Navier–Stokes, Yang–Mills mass gap). The methods that drove the 2019–2026 fusion — perfectoid spaces, prismatic cohomology, condensed mathematics, regularity structures, polynomial methods, ∞-categories — are powerful precisely because they unify *adjacent* fields. They are not, so far, producing the kind of foundational shift that the truly stuck problems would require.
+
+This matters because most field-level optimism implicitly assumes that breakthroughs propagate. Some do — geometric Langlands fed Fargues–Scholze fed local Langlands fed relative Langlands. But the Millennium problems, with the partial exception of Poincaré (resolved in 2003), have proven inert to that kind of propagation. The fusion is real; the acceleration is real; but the problems mathematicians have always called "the deep ones" remain deep.
+
 ## The pattern
 
 The pattern across all fourteen subfields: **the methods that worked in 2010 are not the methods that work in 2026**.
@@ -416,4 +474,6 @@ The pattern across all fourteen subfields: **the methods that worked in 2010 are
 
 The Fields medalists of the next two cycles (2026, 2030) will, I would guess, almost all work in subfields that fuse two or more of the above — not in any single classical subfield. The pure number theorist, the pure algebraic geometer, the pure analyst is going extinct, in the same way that the pure NLP researcher and the pure CV researcher in deep learning are going extinct. The interesting frontier is the seam.
 
-That fusion is why mathematics, despite being older than every other research field by an order of magnitude, is one of the most exciting intellectual environments of the decade.
+But the analogy to deep learning has a sharp limit worth naming. In ML, the fusion across subfields was forced by a **shared architecture** — the transformer absorbed NLP, then vision, then audio, then video, then code, because the same computational primitive turned out to work everywhere. There is no analogous shared architecture in mathematics. **∞-categories** is a candidate — it is the language in which derived algebraic geometry, geometric Langlands, condensed mathematics, and chromatic homotopy theory all increasingly speak. **Lean** is another candidate — it is the substrate in which all subfields could in principle be made to interoperate at the level of definitions. But neither has the universality the transformer has in ML, and there is a real possibility that mathematics simply has no such unifier and the fusion is happening in an ad hoc, area-by-area fashion. That difference is worth holding onto: ML's fusion was driven from below by an architecture; math's fusion is driven from above by a few people (Scholze, Lurie, Tao, Gaitsgory) whose individual programs span subfields. The latter is harder to scale.
+
+That fusion — bounded as it is — is why mathematics, despite being older than every other research field by an order of magnitude, is one of the most exciting intellectual environments of the decade. And the stubborn problems are why the excitement should not be confused with imminent triumph.
