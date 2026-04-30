@@ -279,6 +279,154 @@ Read across the 2024–2026 RL literature and the same picture appears: **RL is 
 
 ---
 
+## 7. Benchmarks and current SOTA scores
+
+A reference table for the load-bearing benchmarks per subdomain, with the best public results as of early 2026. Scores are approximate, drawn from technical reports, leaderboards, and arxiv evaluation tables; they move month-to-month and rely on self-reported numbers in many cases. Treat this as orientation, not a leaderboard. Where a benchmark is saturated I say so — running it on a frontier model is no longer informative.
+
+The short version of who leads where, before the tables:
+
+- **General reasoning, math, coding, agents:** Claude Opus 4.x, GPT-5 / o3-class, Gemini 2.5 Pro/3 trade the lead month-to-month. **DeepSeek-R1** and its successors are the open-weights frontier and within striking distance on math/code.
+- **Long context:** Gemini's 1M+ context family leads on RULER and needle-style tests; Claude's 1M context is competitive; open-source still trails past 128k.
+- **ASR:** **Whisper-v3** is still the open baseline; **NVIDIA Canary** and **Parakeet** are the open SOTA on English; **OWSM-CTC** is the most reproducible.
+- **TTS / voice:** **F5-TTS**, **NaturalSpeech 3**, **Voicebox** for non-real-time; **Moshi** for full-duplex dialog.
+- **Video generation:** **Sora**, **Veo 3**, **Movie Gen**, **Kling**, **Runway Gen-4** are the closed frontier; **Wan 2.1**, **HunyuanVideo**, **CogVideoX** are the open frontier.
+- **Video understanding:** **Qwen2-VL** / **Qwen2.5-VL** and **InternVL2.5** are the open SOTA; closed frontier (Gemini, GPT-5) higher on long-video benchmarks.
+- **Music / sound generation:** **Suno v4** and **Udio** lead production; **Stable Audio 2** and **MusicGen** are the open reference points.
+- **Robotics / VLA:** **π0** and **π0.5** (Physical Intelligence) lead on real-robot generalization; **OpenVLA** is the open baseline; **GR00T N1** for humanoids.
+- **Protein structure / design:** **AlphaFold 3** for complex prediction; **RFdiffusion** / **Chai-1** / **Boltz-1** for design and open replication.
+- **3D reconstruction / generation:** **3D Gaussian Splatting** for scenes; **VGGT** for feed-forward reconstruction; **Trellis** for image-to-3D.
+- **RL / world models:** **DreamerV3** for general agents; **Genie 3** for interactive video world models; **DIAMOND** for diffusion-based environments.
+
+### NLP — reasoning and knowledge
+
+| Benchmark | What it measures | Current SOTA | Notes |
+|---|---|---|---|
+| **MMLU-Pro** | 57-subject reasoning + knowledge | ~88–92% (frontier reasoning models) | Original MMLU saturated above 92%; MMLU-Pro is the harder successor. |
+| **GPQA Diamond** | Graduate-level science (PhD-blocking questions) | ~85–90% (o3-class, Claude Opus 4.x, Gemini 2.5 Pro) | Human PhD experts ~65%; reasoning models broke past expert level in late 2024. |
+| **AIME 2024 / 2025** | Olympiad-level math | 95%+ on AIME 2024 for o3-class; ~80–90% on AIME 2025 | DeepSeek-R1 reported ~79.8% on AIME 2024; o3 reported 96.7%. AIME 2025 still discriminates. |
+| **MATH-500** | Competition / high-school math | Saturated above 96% | No longer informative for frontier models. |
+| **FrontierMath** | Research-level math (Tao et al. designed) | ~25–32% for o3-class | Designed to stay unsaturated for years. |
+| **Humanity's Last Exam (HLE)** | Cross-domain expert-blocking | ~25–35% (top reasoning models) | Best new "stays hard" benchmark; most non-reasoning models still under 10%. |
+| **ARC-AGI v1** | Few-shot abstract visual reasoning | ~87% (o3 high-compute setting) | High-compute runs cost \$20+ per task; v1 is effectively retired as a frontier target. |
+| **ARC-AGI v2** | Harder ARC successor | <20% across the board | The current frontier puzzle. |
+
+### NLP — coding and agents
+
+| Benchmark | What it measures | Current SOTA | Notes |
+|---|---|---|---|
+| **SWE-bench Verified** | Real GitHub issue resolution | ~70–82% (Claude Sonnet/Opus 4.x, GPT-5, Gemini 2.5 Pro) | Was ~12% (Claude 3 Opus) in early 2024. Largest single-benchmark jump in recent history. |
+| **SWE-bench Multimodal** | Bug fixes with visual context | ~50–60% | Newer, less saturated. |
+| **LiveCodeBench** | Contest-style coding (time-stratified) | ~85–90% (top reasoning models) | Time-stratification mitigates contamination. |
+| **HumanEval / MBPP** | Function-completion | Saturated (>95%) | Useless for frontier comparison. |
+| **τ-bench (tau-bench)** | Multi-turn tool-use in retail/airline domains | ~70–80% | Better proxy for "real agent" work than single-turn benchmarks. |
+| **BFCL v3** (Berkeley Function Calling) | Function calling correctness | ~85–90% | Standard tool-use benchmark. |
+| **WebArena / VisualWebArena** | Web-browsing agents | ~40–55% | Stays hard; the agent frontier. |
+
+### NLP — long context
+
+| Benchmark | What it measures | Current SOTA | Notes |
+|---|---|---|---|
+| **RULER (128k)** | Long-context retrieval and reasoning | ~88–92% (Gemini 1.5/2.5 Pro, Claude Sonnet 4.x) | The credible long-context test bed; needle-in-haystack is too easy. |
+| **RULER (1M)** | Frontier-context regime | Gemini family ~80%+; others drop sharply | Few credible 1M-token systems. |
+| **LongBench v2** | Realistic long-document tasks | ~50–60% | Stays hard. |
+| **∞Bench** | Multi-task long context | ~60–70% top | Older but still cited. |
+
+### Speech — ASR
+
+| Benchmark | What it measures | Current SOTA | Notes |
+|---|---|---|---|
+| **LibriSpeech test-clean** | English read speech WER | ~1.4–1.7% WER (Parakeet, Canary, Whisper-v3) | Saturated. |
+| **LibriSpeech test-other** | Noisier English | ~2.8–3.5% WER | Near-saturated. |
+| **Common Voice (multilingual)** | 100+ language WER | Whisper-v3 baseline; OWSM/Canary close on covered languages | Very high variance across languages. |
+| **FLEURS** | 102-language ASR | ~10–15% avg WER (top models) | The standard multilingual coverage benchmark. |
+| **AMI / Earnings-22** | Meeting / accented speech | 12–18% WER | Where general ASR still struggles. |
+
+### Speech — TTS and voice
+
+| Benchmark | What it measures | Current SOTA | Notes |
+|---|---|---|---|
+| **LibriTTS WER (objective)** | Synthesis intelligibility | <2% | Saturated for non-streaming. |
+| **SECS / SIM-O** | Speaker similarity (zero-shot voice cloning) | ~0.65–0.75 (F5-TTS, NaturalSpeech 3, Voicebox) | Some commercial systems claim higher. |
+| **DNSMOS / UTMOS** | Predicted MOS | ~4.0–4.4 | Most frontier systems indistinguishable from ground truth on these proxies. |
+| **Moshi latency (full-duplex)** | End-to-end response time | ~200ms | Production-quality target the open community is chasing. |
+
+### Video — generation
+
+| Benchmark | What it measures | Current SOTA | Notes |
+|---|---|---|---|
+| **VBench** | 16-dimension video quality (subject/background consistency, motion smoothness, etc.) | Sora, Veo 3, Movie Gen, Kling 2 lead closed; Wan 2.1, HunyuanVideo lead open | The de facto standard. |
+| **VBench-Long / VBench++** | Long video and I2V | Same leaders; gap narrows on I2V | Adds image-conditioned and long-form. |
+| **Movie Gen Bench** | Internal Meta eval (released) | Movie Gen self-reported leader | Reproducible recipe; useful sanity check. |
+| **EvalCrafter** | Multi-dimension comparison | Closed > open by 5–15% | Aggregate score is fragile; use dimension-by-dimension. |
+
+### Video — understanding
+
+| Benchmark | What it measures | Current SOTA | Notes |
+|---|---|---|---|
+| **VideoMME** | Long/short video QA | ~75–82% (Qwen2.5-VL, InternVL2.5, Gemini) | Best general video-understanding leaderboard. |
+| **MVBench** | 20-task video understanding | ~70–78% | Approaching saturation. |
+| **EgoSchema** | Long egocentric video | ~65–75% | Stays hard; designed to require true temporal reasoning. |
+| **NExT-QA / Perception Test** | Causal/temporal reasoning over video | ~75–85% | The classic comprehension benchmarks. |
+
+### Sound (non-speech audio)
+
+| Benchmark | What it measures | Current SOTA | Notes |
+|---|---|---|---|
+| **AudioSet mAP** | 527-class audio tagging | ~50–52% (BEATs and successors) | The reference tagging benchmark. |
+| **AudioCaps FAD** | Text-to-audio quality (lower is better) | ~1.3–1.8 (AudioLDM 2, Stable Audio 2) | Frechet Audio Distance. |
+| **MusicCaps FAD-VGG** | Text-to-music quality | ~3.5–4.5 (MusicGen, Stable Audio 2) | Suno/Udio do not publish on this. |
+| **MUSDB18 SDR** | Music source separation | ~10–11 dB (Band-Split RNN, HT Demucs) | Higher is better; near practical ceiling. |
+| **CLAP zero-shot AudioSet** | Text-audio alignment | ~50%+ mAP | The audio analogue of CLIP zero-shot. |
+
+### Robotics and VLAs
+
+| Benchmark | What it measures | Current SOTA | Notes |
+|---|---|---|---|
+| **LIBERO** | 4-suite manipulation (spatial, object, goal, long) | ~85–95% success (π0, OpenVLA, RDT) | The standard simulated VLA benchmark. |
+| **SimplerEnv** | Sim-to-real-aligned manipulation eval | π0, π0.5, RT-2-X, Octo lead | Designed so sim numbers correlate with real-robot performance. |
+| **CALVIN** | Long-horizon language-conditioned manipulation | ~80%+ (top VLAs) | Saturating. |
+| **Open X-Embodiment evals** | Cross-embodiment generalization | RT-X, OpenVLA, π0 the reference points | Dataset-paper benchmark. |
+| **HumanoidBench / Isaac humanoid suites** | Whole-body humanoid control | RL + sim-to-real (Berkeley, NVIDIA, Tesla recipes) | No single agreed metric yet. |
+
+### Biology
+
+| Benchmark | What it measures | Current SOTA | Notes |
+|---|---|---|---|
+| **CASP15 / CASP16 GDT-TS** | Protein structure prediction | AF2/AF3 ~85–90 GDT-TS | The classical structural-biology benchmark. |
+| **AF3 PoseBusters** | Protein–ligand docking | ~70–80% success (AlphaFold 3) | Major step over classical docking. |
+| **RFdiffusion success rate** | De novo binder design | ~10–30% wet-lab hit rate | Active area; numbers vary by target class. |
+| **ProteinGym** | Variant effect prediction (ESM-class models) | ESM-2/ESM3 lead open | Standard zero-shot benchmark for PLMs. |
+| **Evo / nucleotide LMs** | DNA modeling at long context | Evo (StripedHyena) the open reference | Million-token DNA context. |
+
+### 3D reconstruction and generation
+
+| Benchmark | What it measures | Current SOTA | Notes |
+|---|---|---|---|
+| **Mip-NeRF 360 / DTU PSNR** | Novel-view synthesis | 3D Gaussian Splatting baseline; recent variants push +1–2 dB | Saturated as a research target. |
+| **CO3D / RealEstate10k** | Feed-forward 3D reconstruction without poses | DUSt3R, MASt3R, VGGT | The pose-free regime. |
+| **Tanks and Temples / ETH3D** | Multi-view stereo | 3DGS-based and recent feed-forward methods | Long-standing reference. |
+| **GSO (Google Scanned Objects)** | Image-to-3D generation | Trellis, InstantMesh, recent DiT-3D variants | No single agreed metric — mixes CLIP score, LPIPS, F-score. |
+
+### RL and world models
+
+| Benchmark | What it measures | Current SOTA | Notes |
+|---|---|---|---|
+| **Atari 100k** | Sample-efficient RL (human-normalized score) | DreamerV3 ~120%, IRIS ~100%, EfficientZero V2 ~190% | World-model methods now beat humans at 100k frames. |
+| **DMC (DeepMind Control)** | Continuous control | DreamerV3, TD-MPC2 dominant | Saturated on many tasks. |
+| **Crafter** | Open-ended survival (procedural) | DreamerV3 superhuman | Reference for general agents. |
+| **Minecraft Diamond (from scratch)** | Long-horizon exploration | DreamerV3 first, no prior knowledge | Headline claim of the Nature paper. |
+| **NetHack Learning Environment** | Hard exploration | Stays hard; no reliable solver | The unsolved bar. |
+| **Procgen** | Generalization across procedural levels | Stays hard | Less tracked in 2025–2026 but still relevant for generalization claims. |
+| **Genie 3 interactive eval** | Minute-long, prompt-controllable simulation | Genie 3 (DeepMind) | No public quantitative leaderboard yet — assessed qualitatively. |
+
+A few honest caveats on this section:
+
+1. Many of these numbers are self-reported in technical reports and have not been independently reproduced. Where a frontier closed model claims +2 points over the previous SOTA, treat that as a hint, not a settled fact.
+2. Some benchmarks (HumanEval, MMLU, MATH-500) are *contaminated* by training data overlap. The credible benchmarks now bake in time-stratification (LiveCodeBench), private test sets (FrontierMath, HLE), or held-out construction (ARC-AGI v2).
+3. The most important capabilities don't have benchmarks yet. There is no good public benchmark for "can this agent maintain coherent context over a multi-day software-engineering task" or "does this world model permit zero-shot transfer to a real robot." The frontier is moving faster than the eval community can keep up.
+
+---
+
 ## What I'd read first
 
 If you have one weekend and want to recompile your mental model of the field, I'd read in this order:
