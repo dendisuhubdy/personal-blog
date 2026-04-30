@@ -1,5 +1,5 @@
 ---
-title: "The Edge of Deep Learning Research: A Citation-Grounded Survey from ICML, ICLR, NeurIPS (2023–2026)"
+title: "The Edge of Artificial Intelligence Research: A Citation-Grounded Survey from ICML, ICLR, NeurIPS (2023–2026)"
 author: Dendi Suhubdy
 pubDatetime: 2026-04-28T15:00:00Z
 featured: false
@@ -25,7 +25,7 @@ tags:
   - musicgen
   - alphafold
   - openvla
-description: "A domain-by-domain survey of the deep learning research frontier, grounded in specific papers from ICML, ICLR, NeurIPS, and adjacent venues (CoRL, CVPR, Nature). Covers natural language processing, speech, video, sound, robotics/VLA, biology, 3D generation, diffusion architecture, and the renaissance of reinforcement learning and world models. The through-line: pretraining is no longer the frontier — test-time compute, generative simulators, and embodied grounding are."
+description: "A domain-by-domain survey of the artificial intelligence research frontier, grounded in specific papers from ICML, ICLR, NeurIPS, and adjacent venues (CoRL, CVPR, Nature). Covers natural language processing, speech, video, sound, robotics/VLA, biology, 3D generation, diffusion architecture, and the renaissance of reinforcement learning and world models. The through-line: pretraining is no longer the frontier — test-time compute, generative simulators, and embodied grounding are."
 ---
 
 There is a version of this post that is just a list of papers. I want to write the version that explains *why* each paper matters and what the citation graph around it actually looks like — because the field has fragmented into enough subfields that even practitioners working in adjacent areas often miss the load-bearing references.
