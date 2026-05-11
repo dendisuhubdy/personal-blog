@@ -15,7 +15,7 @@ description: "Can quantum models train as efficiently as classical neural networ
 
 Of all the papers to land on the desk of someone who runs [backpropagation.ai](https://backpropagation.ai), this one was inevitable.
 
-["On quantum backpropagation, information reuse, and cheating measurement collapse"](https://arxiv.org/abs/2305.13362) by Amira Abbas, Robbie King, Hsin-Yuan Huang, William J. Huggins, Ramis Movassagh, Dar Gilboa, and Jarrod R. McClean---a collaboration between Google Quantum AI, the University of KwaZulu-Natal, the University of Amsterdam, QuSoft, and Caltech---published at NeurIPS 2024, asks the most fundamental question in quantum machine learning:
+["On quantum backpropagation, information reuse, and cheating measurement collapse"](https://arxiv.org/abs/2305.13362) by Amira Abbas, Robbie King, Hsin-Yuan Huang, William J. Huggins, Ramis Movassagh, Dar Gilboa, and Jarrod R. McClean---a collaboration between Google Quantum AI, the University of KwaZulu-Natal, the University of Amsterdam, QuSoft, and Caltech---published at NeurIPS 2023 (Spotlight), asks the most fundamental question in quantum machine learning:
 
 **Can parameterized quantum models train as efficiently as classical neural networks?**
 
