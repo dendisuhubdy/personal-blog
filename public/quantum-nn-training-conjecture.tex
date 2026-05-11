@@ -247,11 +247,7 @@ We list concrete falsification routes for each form.
 
 \section{Discussion}\label{sec:discussion}
 
-The three forms are ordered by the author's subjective probability of proof, in reverse: Form~C is judged most likely to be proven first, Form~B next, and Form~A last. The reasoning is that Form~A is closest to the gradient-oracle setting where the lower-bound literature has accumulated, Form~B faces the technical heart of QSVT polynomial approximation but no known lower bound, and Form~C operates in a regime (non-logconcave sampling) where the existing speedups are quartic-to-exponential and the dequantisation programme has not so far applied.
-
 The conjecture is not that quantum computers will train neural networks faster than classical ones in some imprecise sense. It is that at least one of three precisely specified algorithmic claims admits a proof under access models natural enough to apply to deep-network training. Each form maps to an existing primitive: amplitude estimation and quantum gradient estimation (Form~A), quantum singular value transformation (Form~B), quantum-enhanced non-reversible Markov chains (Form~C). The conjecture asserts that the compositions and constructions required are achievable; the literature establishes that the components are.
-
-The most likely route to a positive answer, in the author's view, is through Form~C: the sampling reformulation avoids the gradient-oracle lower bounds entirely, and the underlying speedups exist in print. The most likely route to a negative answer is through an extension of dequantisation to the non-logconcave Gibbs-measure setting.
 
 \section*{Acknowledgements}
 
