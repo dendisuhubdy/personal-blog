@@ -1,0 +1,449 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{microtype}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!black,
+  citecolor=blue!50!black,
+  urlcolor=blue!50!black
+}
+
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+
+\DeclareMathOperator*{\poly}{poly}
+\DeclareMathOperator*{\polylog}{polylog}
+\newcommand{\Otil}{\widetilde{O}}
+\newcommand{\Omegatil}{\widetilde{\Omega}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\veps}{\varepsilon}
+\newcommand{\loss}{\mathcal{L}}
+\newcommand{\Dset}{\mathcal{D}}
+\newcommand{\Alg}{\mathcal{A}}
+
+\title{\textbf{On Quantum Algorithms for Neural-Network Training:\\
+A Conjecture on Fault-Tolerant Speedups}}
+\author{Dendi Suhubdy\\\small\texttt{dendi.suhubdy@gmail.com}}
+\date{May 11, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We state, in three escalating forms, a mathematical conjecture for a fault-tolerant quantum algorithm that accelerates --- or replaces --- backpropagation for empirical-risk minimisation in neural networks. The conjecture is positioned against six bodies of established literature: (i) the Baur--Strassen \cite{BaurStrassen1983} cheap-gradient bound, (ii) Jordan's \cite{Jordan2005} and Gily\'{e}n--Arunachalam--Wiebe's \cite{GAW2019} quantum-gradient-estimation algorithms with matching lower bounds, (iii) Abbas et al.'s \cite{AbbasEtAl2023} NeurIPS~2023 impossibility and shadow-tomography workaround for parameterised quantum models, (iv) quantum semidefinite-programming and interior-point solvers \cite{BrandaoSvore2017,vAGGdW2020,KerenidisPrakash2020,Augustino2023}, (v) the Zhang--Leng--Li \cite{ZhangLengLi2023} stationary-point and Garg--Kothari--Netrapalli--Sherif \cite{GKNS2021} non-smooth lower bounds, and (vi) the recent 2024--2026 line on quantum-enhanced non-reversible Markov chains and non-logconcave sampling \cite{QuantumNonLogconcave2025,QuantumMCMCOpt2025}. Form~A predicts a $\Otil(\sqrt{NP}/\veps)$ quantum-query upper bound for full-gradient estimation of empirical risk on $N$ samples and $P$ parameters. Form~B predicts the same gradient is recoverable from a quantum singular-value-transformation commutator estimate, with the chain rule never invoked. Form~C predicts that training, reformulated as non-logconcave quantum sampling, reaches an $\veps$-approximate second-order stationary point at an exponent below the classical~$\veps^{-1.75}$. For each form we specify the access model, identify which existing lower bound it must thread, and enumerate falsification routes. The conjecture is offered as an open problem, not a theorem.
+\end{abstract}
+
+\medskip
+
+\noindent\textbf{Keywords:} quantum computing; quantum machine learning; backpropagation; high-dimensional optimisation; quantum Langevin; quantum singular value transformation; barren plateaus; \textsf{BQP}.
+
+\medskip
+
+\noindent\textbf{MSC2020:} 68Q12 (Quantum algorithms), 68T07 (Artificial neural networks), 90C26 (Nonconvex programming), 65K05 (Mathematical programming methods).
+
+\tableofcontents
+
+\section{Introduction}\label{sec:intro}
+
+Reverse-mode automatic differentiation makes the cost of computing the gradient of a smooth function bounded by a small constant multiple of the cost of evaluating the function itself, independent of the number of variables \cite{BaurStrassen1983}. This \emph{cheap-gradient principle} is what makes modern deep learning tractable: it permits training of models with $P \gtrsim 10^{12}$ parameters at a per-step cost only a small multiple of one forward pass. Any candidate quantum algorithm for neural-network training must situate itself with respect to this bound.
+
+Three claims have appeared in the recent literature in mutual tension. First, generic quantum gradient estimation in $d$ dimensions admits a $\Otil(\sqrt{d}/\veps)$ query-complexity upper bound \cite{GAW2019}, optimal up to polylogarithmic factors. Second, in the parameterised-quantum-circuit setting, single-copy access to the output state prohibits backpropagation-style scaling: $\Omega(M)$ circuit runs per gradient \cite{AbbasEtAl2023}. Third, for smooth non-convex stationary-point finding in $\R^P$ with quantum derivative oracles, no asymptotic speedup over classical algorithms exists \cite{ZhangLengLi2023}.
+
+These results are not contradictory --- they hold in different access models with different objectives --- but they make the question \emph{``can a fault-tolerant quantum computer train a neural network asymptotically faster than a classical one?''} delicate. This paper states a three-form conjecture that, for each form, identifies the access model, the existing lower bound it must avoid, and the established algorithmic primitive it would compose. The conjecture is not proved here. Its purpose is to specify an open problem precisely enough that progress on it is testable.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Notation}
+
+Let $f_\theta : \mathcal{X} \to \mathcal{Y}$ be a neural network with parameters $\theta \in \R^P$, computation graph $G=(V,E)$, and depth $L$. Let $\Dset = \{(x_i, y_i)\}_{i=1}^N$ be a dataset, $\ell : \mathcal{Y}\times\mathcal{Y} \to \R$ a smooth loss, and
+\begin{equation}
+\loss(\theta) \;\coloneqq\; \frac{1}{N}\sum_{i=1}^N \ell\bigl(f_\theta(x_i), y_i\bigr).
+\end{equation}
+We write $T_{\text{fwd}}$ for the gate count of a reversible quantum implementation of $f_\theta$, and assume $T_{\text{fwd}} = O(|E|) = O(PL)$. Throughout, $\Otil(\cdot)$ suppresses polylogarithmic factors in $N, P, 1/\veps, 1/\delta$.
+
+\subsection{Classical baseline}
+
+\begin{theorem}[Baur--Strassen \cite{BaurStrassen1983}]\label{thm:baur-strassen}
+For every straight-line arithmetic program of size $L$ computing $f : \R^d \to \R$, there exists a straight-line program of size $\le 5L$ computing $f$ together with $\nabla f$. The dimension $d$ does not appear in the multiplicative overhead.
+\end{theorem}
+
+Theorem~\ref{thm:baur-strassen} is the worst-case-optimal classical bound any quantum algorithm must improve upon. Modern reverse-mode automatic differentiation \cite{GriewankWalther2008} achieves a practical constant of $2$--$4$ for neural network gradients.
+
+\subsection{Access models}
+
+We distinguish three quantum access types for stating the conjecture.
+
+\begin{definition}[Coherent data oracle]
+\label{def:data-oracle}
+A coherent data oracle $O_\Dset$ implements
+\[
+O_\Dset : |i\rangle|0\rangle \mapsto |i\rangle|x_i, y_i\rangle,\quad i \in [N],
+\]
+and supports superposition queries. We assume $O_\Dset$ is realisable with $\Otil(\log N)$ depth in the bucket-brigade QRAM model \cite{GLM2008}, or with classical-equivalent data-loading cost in a sequential read model.
+\end{definition}
+
+\begin{definition}[Reversible forward-pass oracle]
+\label{def:fwd-oracle}
+A reversible forward-pass oracle $U_{f,\theta}$ implements
+\[
+U_{f,\theta} : |x\rangle|y\rangle|0\rangle \mapsto |x\rangle|y\rangle|\ell(f_\theta(x), y)\rangle
+\]
+to additive precision $2^{-b}$ using $T_{\text{fwd}} = \Otil(|E|)$ Clifford$+$T gates, with $\Otil(b)$ ancillas.
+\end{definition}
+
+\begin{definition}[Block-encoding of the loss]
+\label{def:block-encoding}
+A unitary $U$ is an $(\alpha, a, \veps)$-block-encoding of the loss Hamiltonian $H_\loss$ if
+\[
+\bigl\|H_\loss - \alpha\,(\langle 0|^{\otimes a} \otimes I)\,U\,(|0\rangle^{\otimes a} \otimes I)\bigr\| \le \veps.
+\]
+We allow $H_\loss = \nabla^2 \ell(f_\theta(x), y)$ or any Hermitian observable whose expectation encodes $\loss(\theta)$ \cite{GSLW2019}.
+\end{definition}
+
+\section{The conjecture}\label{sec:conjecture}
+
+We state the conjecture in three forms, ordered by increasing strength and decreasing similarity to classical backpropagation.
+
+\begin{conjecture}[Form A: Quantum-accelerated backpropagation]\label{conj:A}
+There exists a fault-tolerant quantum algorithm $\Alg_A$ such that, for every $\veps, \delta \in (0,1)$, given oracles $O_\Dset$ (Def.~\ref{def:data-oracle}) and $U_{f,\theta}$ (Def.~\ref{def:fwd-oracle}), $\Alg_A$ returns $\tilde g \in \R^P$ satisfying
+\[
+\Pr\bigl[\,\|\tilde g - \nabla_\theta \loss(\theta)\|_\infty \le \veps\,\bigr] \;\ge\; 1 - \delta
+\]
+using
+\begin{enumerate}[label=(\roman*),itemsep=0pt]
+\item query complexity $\Otil\bigl(\sqrt{N}\cdot\sqrt{P}\cdot\veps^{-1}\cdot\log(1/\delta)\bigr)$;
+\item circuit depth $\Otil\bigl(L\cdot\polylog(N,P,\veps^{-1})\bigr)$;
+\item ancilla space $O\bigl(P\cdot\polylog(N,\veps^{-1})\bigr)$.
+\end{enumerate}
+\end{conjecture}
+
+\begin{conjecture}[Form B: Backpropagation replacement]\label{conj:B}
+There exists a fault-tolerant quantum algorithm $\Alg_B$ that, given an $(\alpha, a, \veps)$-block-encoding $U_{H_\theta}$ of the parameter Hamiltonian and access to the derivative-generator $\partial_\theta H_\theta$, recovers
+\[
+\nabla_\theta \loss(\theta) \;=\; \Bigl\langle\,i[H_\loss, \partial_\theta H_\theta]\,\Bigr\rangle
+\]
+via quantum singular-value transformation \cite{GSLW2019} and phase estimation in $\Otil(\alpha/\veps)$ queries to $U_{H_\theta}$. The chain rule on $G$ is invoked nowhere in $\Alg_B$.
+\end{conjecture}
+
+\begin{conjecture}[Form C: Non-gradient training]\label{conj:C}
+There exists a fault-tolerant quantum algorithm $\Alg_C$ that, given $O_\Dset$ and $U_{f,\theta}$ and a temperature $\beta = \Omega(\log P)$, samples $\hat\theta \sim \pi_\beta$ from the Gibbs measure
+\[
+\pi_\beta(\theta) \;\propto\; \exp\bigl(-\beta\,\loss(\theta)\bigr)
+\]
+to total-variation accuracy $\veps$ in time
+\[
+\Otil\bigl(\poly(P)\cdot \veps^{-c}\bigr),\qquad c < 1.75.
+\]
+Under standard concentration assumptions, $\hat\theta$ is an $\veps$-approximate second-order stationary point of $\loss$.
+\end{conjecture}
+
+\section{Plausibility of Form A}\label{sec:formA}
+
+\subsection{Compositional argument}
+
+Conjecture~\ref{conj:A} composes four established quantum primitives. The $\sqrt{N}$ factor follows from quadratic speedup for sample-mean estimation via amplitude estimation \cite{BHMT2002,Montanaro2015,CornelissenHamoudiJerbi2022}: writing $\nabla \loss = N^{-1}\sum_i \nabla\ell_i$, the multivariate quantum mean estimator achieves additive $\veps$ in $\ell_2$ norm using $\Otil(\sqrt{N}/\veps)$ queries to a per-sample gradient oracle.
+
+The $\sqrt{P}$ factor follows from quantum gradient estimation in $P$ dimensions \cite{GAW2019}, which is optimal up to polylogarithmic factors against a matching $\Omegatil(\sqrt{P}/\veps)$ lower bound in the continuous-phase-query model.
+
+The circuit-depth bound $\Otil(L\polylog)$ requires that the forward pass remain sequentially depth-$L$ after block-encoding composition, consistent with the layer-wise structure of standard neural-network architectures.
+
+\subsection{Obstructions}
+
+Three technical conditions must be discharged for a proof of Conjecture~\ref{conj:A}:
+\begin{enumerate}[label=(O\arabic*),itemsep=0pt]
+\item \emph{Oracle composition without poly-$P$ blow-up.} The combined estimator must avoid an additional $\poly(P)$ factor in ancilla management, which would dominate the claimed $\sqrt{P}$ scaling.
+\item \emph{QRAM realisability.} The $\sqrt{N}$ factor is contingent on the realisability of the coherent data oracle. No scalable QRAM implementation currently exists; the claim is conditional on the bucket-brigade model \cite{GLM2008}.
+\item \emph{Zhang--Leng--Li compatibility.} The query-complexity lower bound of~\cite{ZhangLengLi2023} for finding $\veps$-stationary points of smooth non-convex functions matches classical complexity. Conjecture~\ref{conj:A} addresses \emph{gradient computation at a fixed} $\theta$, not stationary-point finding; a proof must verify this distinction does not collapse under reductions.
+\end{enumerate}
+
+\section{Plausibility of Form B}\label{sec:formB}
+
+\subsection{Heisenberg-derivative argument}
+
+Conjecture~\ref{conj:B} rests on the observation that for a Hamiltonian $H_\theta$ with parameter-derivative-generator $\partial_\theta H_\theta$, the gradient of the expectation $\loss(\theta) = \langle\psi|H_\loss(\theta)|\psi\rangle$ is the expectation of the commutator
+\[
+\nabla_\theta \loss(\theta) \;=\; \langle\psi\,|\,i[H_\loss, \partial_\theta H_\theta]\,|\,\psi\rangle,
+\]
+in a Heisenberg-picture sense. Given block-encodings of both operators, quantum singular value transformation \cite{GSLW2019} applies any bounded polynomial to the singular values of the encoded operator. The commutator estimate is therefore reducible to phase estimation on a polynomial-in-$1/\veps$-degree block-encoding of $i[H_\loss, \partial_\theta H_\theta]$.
+
+\subsection{Obstructions}
+
+\begin{enumerate}[label=(O\arabic*),itemsep=0pt,start=4]
+\item \emph{Non-linearity polynomial-approximation cost.} ReLU, softmax, and GELU activations do not block-encode cleanly. They must be approximated by polynomials of degree $d(\veps) = \poly(1/\veps)$, contributing a polynomial-in-$1/\veps$ overhead to circuit depth.
+\item \emph{Block-encoding normalisation.} The normalisation factor $\alpha$ in Def.~\ref{def:block-encoding} typically grows with the spectral norm of the operator, which for neural-network losses depends on network width and depth in ways that can erode the claimed speedup.
+\item \emph{Measurement collapse.} Per Abbas et al.~\cite{AbbasEtAl2023}, gradients of parameterised quantum models cannot be efficiently estimated under single-copy access. Conjecture~\ref{conj:B} circumvents this by representing the loss coherently as a block-encoded operator rather than as the output of a parameterised circuit, but requires that the block-encoding be efficiently constructible without intermediate measurement.
+\end{enumerate}
+
+\section{Plausibility of Form C}\label{sec:formC}
+
+\subsection{Non-logconcave sampling argument}
+
+The Zhang--Leng--Li \cite{ZhangLengLi2023} and Garg--Kothari--Netrapalli--Sherif \cite{GKNS2021} lower bounds rule out generic quantum speedups for optimisation \emph{with gradient oracles}. They are silent on the regime where training is reformulated as sampling. The recent quantum-Langevin and non-reversible-Markov-chain line \cite{QuantumNonLogconcave2025,QuantumMCMCOpt2025} establishes:
+\begin{itemize}[itemsep=0pt]
+\item up to quartic speedup over classical Langevin dynamics in the non-logconcave regime, via encoding the Gibbs measure as the kernel of a factorised Witten Laplacian and applying quantum eigenvalue transformation;
+\item up to exponential speedup for non-reversible Markov chains, beating the quadratic limit of reversible-walk methods inherited from \cite{Szegedy2004,MNRS2011}.
+\end{itemize}
+Neural-network posteriors are non-logconcave by construction. Sampling from $\pi_\beta \propto \exp(-\beta\loss)$ at large $\beta$ concentrates on minima of $\loss$. For smooth $\loss$ the concentration is to first-order stationary points; under additional spectral-gap assumptions on the local Hessian, to second-order stationary points as well \cite{ZhangLengLi2021}.
+
+\subsection{Obstructions}
+
+\begin{enumerate}[label=(O\arabic*),itemsep=0pt,start=7]
+\item \emph{Spectral-gap dependence.} The runtime of quantum Langevin methods depends polynomially on the spectral gap of the underlying chain. For deep-network loss landscapes the gap behaviour is empirically unknown and may scale unfavourably with width or depth.
+\item \emph{Temperature scaling.} Reaching an $\veps$-approximate stationary point requires $\beta = \Omega(\log P)$, contributing additional polynomial factors that the conjecture absorbs into $\poly(P)$ but a proof must bound explicitly.
+\item \emph{Dequantisation.} The Tang--Chia--Gily\'{e}n--Li--Lin--Tang--Wang dequantisation programme \cite{Tang2019,ChiaEtAl2020} has repeatedly collapsed apparent quantum speedups to polynomial via length-squared sampling. The non-logconcave regime is where these techniques have so far not applied; a proof of Conjecture~\ref{conj:C} must remain outside the reach of any extended dequantisation.
+\end{enumerate}
+
+\section{Related work}\label{sec:related}
+
+\subsection{Quantum gradient estimation}
+
+The line begins with Jordan~\cite{Jordan2005}, who showed that $O(1)$ queries to a phase oracle suffice for $d$-dimensional gradient estimation, by quantum-Fourier-transforming the perturbation register. Gily\'{e}n, Arunachalam, and Wiebe~\cite{GAW2019} tightened both the query upper bound to $\Otil(\sqrt{d}/\veps)$ and the matching lower bound, using a $d$-dimensional generalisation of polynomial methods. Cornelissen, Hamoudi, and Jerbi~\cite{CornelissenHamoudiJerbi2022} gave near-optimal quantum algorithms for multivariate mean estimation, directly applicable to empirical-risk gradients over a dataset of size $N$.
+
+\subsection{Quantum backpropagation for variational models}
+
+Abbas, King, Huang, Huggins, Movassagh, Gilboa, and McClean~\cite{AbbasEtAl2023} proved that, under single-copy access to the output state of a parameterised quantum model, $\Omega(M)$ circuit executions are required to estimate all $M$ gradient components, matching parameter-shift~\cite{Mitarai2018,Schuld2019}. They constructed a shadow-tomography-based algorithm achieving $\polylog(M)$ \emph{quantum} sample complexity under multi-copy access, at the cost of classical post-processing whose efficiency is governed by open problems in shadow tomography. Bowles, Wright, Farr\'{e}, Coyle, and Schuld~\cite{Bowles2025} subsequently exhibited a class of structured parameterised circuits, not known to be classically simulable, for which the number of distinct circuits required for full gradient estimation is independent of $M$.
+
+\subsection{Quantum convex and semidefinite optimisation}
+
+Brand\~ao and Svore~\cite{BrandaoSvore2017} introduced the first quantum SDP solver, achieving $\Otil(\sqrt{nm})$ scaling in primal--dual dimensions. van Apeldoorn, Gily\'{e}n, Gribling, and de Wolf~\cite{vAGGdW2020} improved the parameter dependence and proved a matching lower bound. Kerenidis and Prakash~\cite{KerenidisPrakash2020} introduced quantum interior-point methods for LP and SDP with $\Otil(n^{1.5}\mu\kappa^3\xi^{-2})$ complexity; Augustino, Nannicini, Terlaky, and Zuluaga~\cite{Augustino2023} closed the inexact--infeasible gap. Chakrabarti, Childs, Li, and Wu~\cite{ChakrabartiEtAl2020} gave $\Otil(n)$ query algorithms for convex optimisation over a convex body in $\R^n$.
+
+\subsection{Non-convex stationary-point finding}
+
+Zhang, Leng, and Li~\cite{ZhangLengLi2023} proved that finding $\veps$-approximate stationary points of smooth non-convex functions admits no asymptotic quantum speedup with derivative oracles. Their saddle-escape paper~\cite{ZhangLengLi2021} established a $\log$-factor dimensional speedup for second-order stationary points via quantum-wave-equation perturbations. Liu, Guan, He, and Lui~\cite{LiuGuanHeLui2024} achieved a genuine $\veps^{-2/3}$ speedup for $(\delta,\veps)$-Goldstein stationary points of non-smooth Lipschitz objectives with zeroth-order stochastic access, threading the loophole left by the smooth-first-order lower bounds.
+
+\subsection{Quantum sampling and Langevin dynamics}
+
+Montanaro~\cite{Montanaro2015} established the foundational quadratic speedup for Monte Carlo mean estimation. Layden et al.~\cite{LaydenEtAl2023} demonstrated empirical speedups for quantum-enhanced MCMC on Ising models. The 2024--2026 line~\cite{QuantumNonLogconcave2025,QuantumMCMCOpt2025} established quartic speedups for non-logconcave sampling and exponential speedups for non-reversible chains.
+
+\subsection{Dequantisation and barren plateaus}
+
+Tang~\cite{Tang2019} initiated the dequantisation programme by giving a polylog-time classical algorithm matching the Kerenidis--Prakash quantum recommendation algorithm under length-squared sampling. Chia, Gily\'{e}n, Li, Lin, Tang, and Wang~\cite{ChiaEtAl2020} extended this to a general framework. McClean, Boixo, Smelyanskiy, Babbush, and Neven~\cite{McCleanEtAl2018} identified the barren-plateau phenomenon; Cerezo et al.~\cite{CerezoEtAl2021,CerezoEtAl2025} established cost-function dependence and the simulability implication of provable absence.
+
+\section{Falsification criteria}\label{sec:falsification}
+
+We list concrete falsification routes for each form.
+
+\begin{itemize}[itemsep=2pt]
+\item \emph{Form~A is falsified} by a proof that any quantum algorithm computing $\nabla\loss$ to $\ell_\infty$ error $\veps$ from $O_\Dset$ and $U_{f,\theta}$ requires $\Omega(NP^{1-o(1)}\veps^{-1})$ queries, or by extension of \cite{ZhangLengLi2023} to the empirical-risk-gradient setting at the conjectured precision.
+\item \emph{Form~B is falsified} by a proof that block-encoding the forward pass of any constant-depth ReLU network requires degree super-polynomial in $1/\veps$, or by an explicit reduction showing such a block-encoding implies an efficient solution to shadow tomography of polynomial-time observables \cite{AbbasEtAl2023}.
+\item \emph{Form~C is falsified} by a dequantisation result extending \cite{ChiaEtAl2020} to block-encoded non-logconcave Gibbs measures under classical length-squared sampling, or by a proof that the spectral gap of the relevant Markov chain on $\R^P$ depends super-polynomially on $P$ for natural network architectures.
+\end{itemize}
+
+\section{Discussion}\label{sec:discussion}
+
+The three forms are ordered by the author's subjective probability of proof, in reverse: Form~C is judged most likely to be proven first, Form~B next, and Form~A last. The reasoning is that Form~A is closest to the gradient-oracle setting where the lower-bound literature has accumulated, Form~B faces the technical heart of QSVT polynomial approximation but no known lower bound, and Form~C operates in a regime (non-logconcave sampling) where the existing speedups are quartic-to-exponential and the dequantisation programme has not so far applied.
+
+The conjecture is not that quantum computers will train neural networks faster than classical ones in some imprecise sense. It is that at least one of three precisely specified algorithmic claims admits a proof under access models natural enough to apply to deep-network training. Each form maps to an existing primitive: amplitude estimation and quantum gradient estimation (Form~A), quantum singular value transformation (Form~B), quantum-enhanced non-reversible Markov chains (Form~C). The conjecture asserts that the compositions and constructions required are achievable; the literature establishes that the components are.
+
+The most likely route to a positive answer, in the author's view, is through Form~C: the sampling reformulation avoids the gradient-oracle lower bounds entirely, and the underlying speedups exist in print. The most likely route to a negative answer is through an extension of dequantisation to the non-logconcave Gibbs-measure setting.
+
+\section*{Acknowledgements}
+
+The author thanks the broader quantum machine learning community for the rigour of the lower-bound literature, which made the formulation of this conjecture non-trivial.
+
+\bibliographystyle{plainnat}
+\begin{thebibliography}{99}
+
+\bibitem[Baur and Strassen(1983)]{BaurStrassen1983}
+W.~Baur and V.~Strassen.
+\newblock The complexity of partial derivatives.
+\newblock \emph{Theoretical Computer Science}, 22(3):317--330, 1983.
+
+\bibitem[Jordan(2005)]{Jordan2005}
+S.~P. Jordan.
+\newblock Fast quantum algorithm for numerical gradient estimation.
+\newblock \emph{Physical Review Letters}, 95:050501, 2005.
+\newblock \href{https://arxiv.org/abs/quant-ph/0405146}{arXiv:quant-ph/0405146}.
+
+\bibitem[Gily\'{e}n et al.(2019a)]{GAW2019}
+A.~Gily\'{e}n, S.~Arunachalam, and N.~Wiebe.
+\newblock Optimizing quantum optimization algorithms via faster quantum gradient computation.
+\newblock In \emph{Proc.\ 30th ACM-SIAM SODA}, pages 1425--1444, 2019.
+\newblock \href{https://arxiv.org/abs/1711.00465}{arXiv:1711.00465}.
+
+\bibitem[Gily\'{e}n et al.(2019b)]{GSLW2019}
+A.~Gily\'{e}n, Y.~Su, G.~H. Low, and N.~Wiebe.
+\newblock Quantum singular value transformation and beyond: exponential improvements for quantum matrix arithmetics.
+\newblock In \emph{Proc.\ STOC 2019}, pages 193--204, 2019.
+\newblock \href{https://arxiv.org/abs/1806.01838}{arXiv:1806.01838}.
+
+\bibitem[Abbas et al.(2023)]{AbbasEtAl2023}
+A.~Abbas, R.~King, H.-Y. Huang, W.~J. Huggins, R.~Movassagh, D.~Gilboa, and J.~R. McClean.
+\newblock On quantum backpropagation, information reuse, and cheating measurement collapse.
+\newblock In \emph{NeurIPS 2023 (Spotlight)}, 2023.
+\newblock \href{https://arxiv.org/abs/2305.13362}{arXiv:2305.13362}.
+
+\bibitem[Bowles et al.(2025)]{Bowles2025}
+J.~Bowles, V.~J. Wright, M.~Farr\'{e}, B.~Coyle, and M.~Schuld.
+\newblock Backpropagation scaling in parameterised quantum circuits.
+\newblock \emph{Quantum}, 9:1873, 2025.
+\newblock \href{https://arxiv.org/abs/2306.14962}{arXiv:2306.14962}.
+
+\bibitem[Brand\~ao and Svore(2017)]{BrandaoSvore2017}
+F.~G. S.~L. Brand\~ao and K.~M. Svore.
+\newblock Quantum speed-ups for solving semidefinite programs.
+\newblock In \emph{FOCS 2017}, pages 415--426.
+\newblock \href{https://arxiv.org/abs/1609.05537}{arXiv:1609.05537}.
+
+\bibitem[van Apeldoorn et al.(2020)]{vAGGdW2020}
+J.~van Apeldoorn, A.~Gily\'{e}n, S.~Gribling, and R.~de Wolf.
+\newblock Quantum SDP-solvers: better upper and lower bounds.
+\newblock \emph{Quantum}, 4:230, 2020.
+\newblock \href{https://arxiv.org/abs/1705.01843}{arXiv:1705.01843}.
+
+\bibitem[Kerenidis and Prakash(2020)]{KerenidisPrakash2020}
+I.~Kerenidis and A.~Prakash.
+\newblock A quantum interior point method for LPs and SDPs.
+\newblock \emph{ACM Transactions on Quantum Computing}, 1(1):1--32, 2020.
+\newblock \href{https://arxiv.org/abs/1808.09266}{arXiv:1808.09266}.
+
+\bibitem[Augustino et al.(2023)]{Augustino2023}
+B.~Augustino, G.~Nannicini, T.~Terlaky, and L.~F. Zuluaga.
+\newblock Quantum interior point methods for semidefinite optimization.
+\newblock \emph{Quantum}, 7:1110, 2023.
+\newblock \href{https://arxiv.org/abs/2112.06025}{arXiv:2112.06025}.
+
+\bibitem[Chakrabarti et al.(2020)]{ChakrabartiEtAl2020}
+S.~Chakrabarti, A.~M. Childs, T.~Li, and X.~Wu.
+\newblock Quantum algorithms and lower bounds for convex optimization.
+\newblock \emph{Quantum}, 4:221, 2020.
+\newblock \href{https://arxiv.org/abs/1809.01731}{arXiv:1809.01731}.
+
+\bibitem[Zhang et al.(2023)]{ZhangLengLi2023}
+C.~Zhang, J.~Leng, and T.~Li.
+\newblock Quantum lower bounds for finding stationary points of nonconvex functions.
+\newblock In \emph{ICML 2023}, 2023.
+\newblock \href{https://arxiv.org/abs/2212.03906}{arXiv:2212.03906}.
+
+\bibitem[Zhang et al.(2021)]{ZhangLengLi2021}
+C.~Zhang, J.~Leng, and T.~Li.
+\newblock Quantum algorithms for escaping from saddle points.
+\newblock \emph{Quantum}, 5:529, 2021.
+\newblock \href{https://arxiv.org/abs/2007.10253}{arXiv:2007.10253}.
+
+\bibitem[Liu et al.(2024)]{LiuGuanHeLui2024}
+C.~Liu, X.~Guan, J.~He, and Y.-X. Lui.
+\newblock Quantum algorithms for nonsmooth nonconvex optimization.
+\newblock In \emph{NeurIPS 2024}, 2024.
+\newblock \href{https://arxiv.org/abs/2410.16189}{arXiv:2410.16189}.
+
+\bibitem[Garg et al.(2021)]{GKNS2021}
+A.~Garg, R.~Kothari, P.~Netrapalli, and S.~Sherif.
+\newblock No quantum speedup over gradient descent for non-smooth convex optimization.
+\newblock In \emph{ITCS 2021}, 2021.
+\newblock \href{https://arxiv.org/abs/2010.01801}{arXiv:2010.01801}.
+
+\bibitem[Brassard et al.(2002)]{BHMT2002}
+G.~Brassard, P.~H{\o}yer, M.~Mosca, and A.~Tapp.
+\newblock Quantum amplitude amplification and estimation.
+\newblock \emph{Contemporary Mathematics}, 305:53--74, 2002.
+\newblock \href{https://arxiv.org/abs/quant-ph/0005055}{arXiv:quant-ph/0005055}.
+
+\bibitem[Montanaro(2015)]{Montanaro2015}
+A.~Montanaro.
+\newblock Quantum speedup of Monte Carlo methods.
+\newblock \emph{Proceedings of the Royal Society A}, 471:20150301, 2015.
+\newblock \href{https://arxiv.org/abs/1504.06987}{arXiv:1504.06987}.
+
+\bibitem[Cornelissen et al.(2022)]{CornelissenHamoudiJerbi2022}
+A.~Cornelissen, Y.~Hamoudi, and S.~Jerbi.
+\newblock Near-optimal quantum algorithms for multivariate mean estimation.
+\newblock In \emph{STOC 2022}, 2022.
+\newblock \href{https://arxiv.org/abs/2111.09787}{arXiv:2111.09787}.
+
+\bibitem[Layden et al.(2023)]{LaydenEtAl2023}
+D.~Layden, G.~Mazzola, R.~V. Mishmash, M.~Motta, P.~Wocjan, J.-S. Kim, and S.~Sheldon.
+\newblock Quantum-enhanced Markov chain Monte Carlo.
+\newblock \emph{Nature}, 619:282--287, 2023.
+
+\bibitem[Quantum non-logconcave sampling(2025)]{QuantumNonLogconcave2025}
+Operator-level quantum acceleration of non-logconcave sampling.
+\newblock 2025.
+\newblock \href{https://arxiv.org/abs/2505.05301}{arXiv:2505.05301}.
+
+\bibitem[Quantum MCMC for optimisation(2025)]{QuantumMCMCOpt2025}
+Quantum speedups for Markov chain Monte Carlo methods with application to optimization.
+\newblock 2025.
+\newblock \href{https://arxiv.org/abs/2504.03626}{arXiv:2504.03626}.
+
+\bibitem[Szegedy(2004)]{Szegedy2004}
+M.~Szegedy.
+\newblock Quantum speed-up of Markov chain based algorithms.
+\newblock In \emph{FOCS 2004}, pages 32--41.
+
+\bibitem[Magniez et al.(2011)]{MNRS2011}
+F.~Magniez, A.~Nayak, J.~Roland, and M.~Santha.
+\newblock Search via quantum walk.
+\newblock \emph{SIAM Journal on Computing}, 40(1):142--164, 2011.
+
+\bibitem[Tang(2019)]{Tang2019}
+E.~Tang.
+\newblock A quantum-inspired classical algorithm for recommendation systems.
+\newblock In \emph{STOC 2019}, 2019.
+\newblock \href{https://arxiv.org/abs/1807.04271}{arXiv:1807.04271}.
+
+\bibitem[Chia et al.(2020)]{ChiaEtAl2020}
+N.-H. Chia, A.~Gily\'{e}n, T.~Li, H.-H. Lin, E.~Tang, and C.~Wang.
+\newblock Sampling-based sublinear low-rank matrix arithmetic framework for dequantizing quantum machine learning.
+\newblock In \emph{STOC 2020}, 2020.
+\newblock \href{https://arxiv.org/abs/1910.06151}{arXiv:1910.06151}.
+
+\bibitem[McClean et al.(2018)]{McCleanEtAl2018}
+J.~R. McClean, S.~Boixo, V.~N. Smelyanskiy, R.~Babbush, and H.~Neven.
+\newblock Barren plateaus in quantum neural network training landscapes.
+\newblock \emph{Nature Communications}, 9:4812, 2018.
+\newblock \href{https://arxiv.org/abs/1803.11173}{arXiv:1803.11173}.
+
+\bibitem[Cerezo et al.(2021)]{CerezoEtAl2021}
+M.~Cerezo, A.~Sone, T.~Volkoff, L.~Cincio, and P.~J. Coles.
+\newblock Cost function dependent barren plateaus in shallow parametrized quantum circuits.
+\newblock \emph{Nature Communications}, 12:1791, 2021.
+\newblock \href{https://arxiv.org/abs/2001.00550}{arXiv:2001.00550}.
+
+\bibitem[Cerezo et al.(2025)]{CerezoEtAl2025}
+M.~Cerezo, M.~Larocca, et al.
+\newblock Does provable absence of barren plateaus imply classical simulability?
+\newblock \emph{Nature Communications}, 16, 2025.
+\newblock \href{https://arxiv.org/abs/2312.09121}{arXiv:2312.09121}.
+
+\bibitem[Mitarai et al.(2018)]{Mitarai2018}
+K.~Mitarai, M.~Negoro, M.~Kitagawa, and K.~Fujii.
+\newblock Quantum circuit learning.
+\newblock \emph{Physical Review A}, 98:032309, 2018.
+\newblock \href{https://arxiv.org/abs/1803.00745}{arXiv:1803.00745}.
+
+\bibitem[Schuld et al.(2019)]{Schuld2019}
+M.~Schuld, V.~Bergholm, C.~Gogolin, J.~Izaac, and N.~Killoran.
+\newblock Evaluating analytic gradients on quantum hardware.
+\newblock \emph{Physical Review A}, 99:032331, 2019.
+\newblock \href{https://arxiv.org/abs/1811.11184}{arXiv:1811.11184}.
+
+\bibitem[Giovannetti et al.(2008)]{GLM2008}
+V.~Giovannetti, S.~Lloyd, and L.~Maccone.
+\newblock Quantum random access memory.
+\newblock \emph{Physical Review Letters}, 100:160501, 2008.
+
+\bibitem[Griewank and Walther(2008)]{GriewankWalther2008}
+A.~Griewank and A.~Walther.
+\newblock \emph{Evaluating Derivatives: Principles and Techniques of Algorithmic Differentiation}.
+\newblock SIAM, 2nd edition, 2008.
+
+\end{thebibliography}
+
+\end{document}
