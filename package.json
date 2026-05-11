@@ -2,6 +2,7 @@
   "name": "personal-blog-scaffold",
   "type": "module",
   "version": "5.5.1",
+  "packageManager": "pnpm@9.15.5",
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build && pagefind --site dist && cp -r dist/pagefind public/",
