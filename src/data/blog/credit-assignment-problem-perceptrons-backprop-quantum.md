@@ -1,7 +1,7 @@
 ---
 title: "The Credit Assignment Problem: From Rosenblatt's Perceptron to Backpropagation to Quantum Gradients"
 author: Dendi Suhubdy
-pubDatetime: 2026-05-11T08:00:00Z
+pubDatetime: 2026-05-11T02:00:00Z
 featured: false
 draft: false
 tags:

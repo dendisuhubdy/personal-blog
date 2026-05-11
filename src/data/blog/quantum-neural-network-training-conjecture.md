@@ -1,7 +1,7 @@
 ---
 title: "On Quantum Algorithms for Neural-Network Training: A Conjecture on Fault-Tolerant Speedups"
 author: Dendi Suhubdy
-pubDatetime: 2026-05-11T10:00:00Z
+pubDatetime: 2026-05-11T02:30:00Z
 featured: false
 draft: false
 tags:
