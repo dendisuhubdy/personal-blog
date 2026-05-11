@@ -2,7 +2,7 @@
 title: "On Quantum Backpropagation, Information Reuse, and Cheating Measurement Collapse"
 author: Dendi Suhubdy
 pubDatetime: 2026-03-31T06:00:00Z
-featured: true
+featured: false
 draft: false
 tags:
   - quantum-computing
