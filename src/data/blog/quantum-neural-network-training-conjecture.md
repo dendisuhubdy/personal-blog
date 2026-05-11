@@ -24,11 +24,13 @@ tags:
 description: "The Suhubdy Conjecture — a three-form mathematical conjecture for a fault-tolerant quantum algorithm that accelerates — or replaces — backpropagation for empirical-risk minimisation in neural networks. Positioned against the Baur–Strassen cheap-gradient bound, Jordan and Gilyén–Arunachalam–Wiebe gradient-estimation algorithms, Abbas et al. (NeurIPS 2023) impossibility, quantum SDP and interior-point solvers, the Zhang–Leng–Li and Garg–Kothari–Netrapalli–Sherif lower bounds, and the 2024–2026 line on quantum non-logconcave sampling. Companion arXiv-style preprint (.tex source and .pdf) provided."
 ---
 
-> **Preprint downloads.** A formal, peer-review-ready version of this conjecture is available as a self-contained arXiv-style preprint: [PDF](/quantum-nn-training-conjecture.pdf) · [LaTeX source](/quantum-nn-training-conjecture.tex). The .tex file is self-compiling under standard distributions (`tectonic`, `pdflatex`, `lualatex`). The blog text below summarises and contextualises the preprint; for the formal statements with theorem environments, falsification criteria, and bibliography, see the PDF.
+> **Preprint downloads.** A formal preprint version of this conjecture is available as a self-contained arXiv-style document: [PDF](/quantum-nn-training-conjecture.pdf) · [LaTeX source](/quantum-nn-training-conjecture.tex). The .tex file is self-compiling under standard distributions (`tectonic`, `pdflatex`, `lualatex`). The blog text below summarises and contextualises the preprint; for the formal statements with theorem environments, falsification criteria, and bibliography, see the PDF.
+>
+> **Companion posts.** Two earlier posts on this site are load-bearing context for the obstructions discussed below: [The credit assignment problem: from Rosenblatt's perceptron to backpropagation to quantum gradients](/posts/credit-assignment-problem-perceptrons-backprop-quantum) (historical survey) and [On quantum backpropagation, information reuse, and cheating measurement collapse](/posts/quantum-backpropagation-information-reuse-measurement-collapse) (extended exposition of Abbas et al., NeurIPS 2023, which is the central obstacle for Form B).
 
 ## Abstract
 
-We state, in three escalating forms, a mathematical conjecture — hereafter referred to as the **Suhubdy Conjecture** — for a fault-tolerant quantum algorithm that accelerates or replaces backpropagation for empirical-risk minimisation in neural networks. The conjecture is positioned against six bodies of established literature: (i) the [Baur–Strassen (1983)](https://www.sciencedirect.com/science/article/pii/0304397583900762) cheap-gradient bound; (ii) [Jordan (2005)](https://arxiv.org/abs/quant-ph/0405146) and [Gilyén–Arunachalam–Wiebe (SODA 2019)](https://arxiv.org/abs/1711.00465) quantum-gradient-estimation algorithms with matching lower bounds; (iii) [Abbas et al. (NeurIPS 2023 Spotlight)](https://arxiv.org/abs/2305.13362) impossibility and shadow-tomography workaround for parameterised quantum models; (iv) quantum semidefinite-programming and interior-point solvers ([Brandão–Svore FOCS 2017](https://arxiv.org/abs/1609.05537), [van Apeldoorn–Gilyén–Gribling–de Wolf Quantum 2020](https://arxiv.org/abs/1705.01843), [Kerenidis–Prakash ACM TQC 2020](https://arxiv.org/abs/1808.09266), [Augustino et al. Quantum 2023](https://arxiv.org/abs/2112.06025)); (v) the [Zhang–Leng–Li (ICML 2023)](https://arxiv.org/abs/2212.03906) stationary-point and [Garg–Kothari–Netrapalli–Sherif (ITCS 2021)](https://arxiv.org/abs/2010.01801) non-smooth lower bounds; and (vi) the recent 2024–2026 line on quantum-enhanced non-reversible Markov chains and non-logconcave sampling ([arXiv:2505.05301](https://arxiv.org/abs/2505.05301), [arXiv:2504.03626](https://arxiv.org/abs/2504.03626)). For each form we specify the access model, identify which existing lower bound it must thread, and enumerate falsification routes. The conjecture is offered as an open problem, not a theorem.
+We state, in three escalating forms, a mathematical conjecture — hereafter referred to as the **Suhubdy Conjecture** — for a fault-tolerant quantum algorithm that accelerates or replaces backpropagation for empirical-risk minimisation in neural networks. The conjecture is positioned against six bodies of established literature: (i) the [Baur–Strassen (1983)](https://www.sciencedirect.com/science/article/pii/0304397583900762) cheap-gradient bound; (ii) [Jordan (2005)](https://arxiv.org/abs/quant-ph/0405146) and [Gilyén–Arunachalam–Wiebe (SODA 2019)](https://arxiv.org/abs/1711.00465) quantum-gradient-estimation algorithms with matching lower bounds; (iii) [Abbas et al. (NeurIPS 2023 Spotlight)](https://arxiv.org/abs/2305.13362) impossibility and shadow-tomography workaround for parameterised quantum models; (iv) quantum semidefinite-programming and interior-point solvers ([Brandão–Svore FOCS 2017](https://arxiv.org/abs/1609.05537), [van Apeldoorn–Gilyén–Gribling–de Wolf Quantum 2020](https://arxiv.org/abs/1705.01843), [Kerenidis–Prakash ACM TQC 2020](https://arxiv.org/abs/1808.09266), [Augustino et al. Quantum 2023](https://arxiv.org/abs/2112.06025)); (v) the [Zhang–Leng–Li (ICML 2023)](https://arxiv.org/abs/2212.03906) stationary-point and [Garg–Kothari–Netrapalli–Sherif (ITCS 2021)](https://arxiv.org/abs/2010.01801) non-smooth lower bounds; and (vi) the recent 2024–2026 line on quantum-enhanced non-reversible Markov chains and non-logconcave sampling ([arXiv:2505.05301](https://arxiv.org/abs/2505.05301), [arXiv:2504.03626](https://arxiv.org/abs/2504.03626)). For each form we specify the access model, identify which existing lower bound it must thread, and enumerate falsification routes. Of the three, Forms A and B are recompositions of established quantum primitives (amplitude estimation $\times$ multivariate gradient estimation, and quantum singular value transformation respectively) and their interest lies primarily in whether the compositions go through without losing the speedup; Form C is the most genuinely novel claim, asserting that non-logconcave-sampling speedups extend to deep-network loss landscapes outside the reach of any current dequantisation. The conjecture is offered as an open problem, not a theorem.
 
 ---
 
@@ -76,6 +78,8 @@ Three quantum access types are referenced by the conjecture:
 
 ## 3. The Suhubdy Conjecture
 
+**Standing assumptions.** Forms A and C are stated under the assumption that the coherent data oracle of §2.3 is realisable — concretely, that the bucket-brigade QRAM construction of [Giovannetti, Lloyd, and Maccone (2008)](https://arxiv.org/abs/0708.1879) (or an equivalent) is physically implementable at fault-tolerant scale. No such device currently exists. Without this assumption, the $\sqrt{N}$ sample factor in Forms A and the data-loading step of Form C collapse to classical-equivalent cost; the conjecture is therefore *physically vacuous on architectures currently being built* and *mathematically non-trivial* in the QRAM-abstraction model. Form B is independent of QRAM but conditional on the existence of a measurement-free, data-respecting block-encoding (see §5.2).
+
 The **Suhubdy Conjecture** is stated in three forms (A, B, C), ordered by increasing strength and decreasing similarity to classical backpropagation. We refer to the individual claims as **Suhubdy Conjecture (Form A / B / C)**.
 
 ### Form A: Quantum-accelerated backpropagation
@@ -86,7 +90,7 @@ $$\Pr\bigl[\,\|\tilde g - \nabla_\theta \mathcal{L}(\theta)\|_\infty \le \vareps
 
 *using*
 
-1. *query complexity $\widetilde{O}\bigl(\sqrt{N}\cdot\sqrt{P}\cdot\varepsilon^{-1}\cdot\log(1/\delta)\bigr)$;*
+1. *query complexity $\widetilde{O}\bigl(\sqrt{N}\cdot\sqrt{P}\cdot\varepsilon^{-1}\cdot\log(1/\delta)\bigr)$ — the $\log(1/\delta)$ factor reflects standard repetition-and-majority amplification; under median-of-means amplification (cf. Cornelissen–Hamoudi–Jerbi) the factor sharpens to $\sqrt{\log(1/\delta)}$, which a proof should adopt;*
 2. *circuit depth $\widetilde{O}\bigl(L\cdot\mathrm{polylog}(N,P,\varepsilon^{-1})\bigr)$;*
 3. *ancilla space $O\bigl(P\cdot\mathrm{polylog}(N,\varepsilon^{-1})\bigr)$.*
 
@@ -100,15 +104,17 @@ $$\nabla_\theta \mathcal{L}(\theta) \;=\; \Bigl\langle\,i\bigl[H_\mathcal{L},\, 
 
 ### Form C: Non-gradient training
 
-*There exists a fault-tolerant quantum algorithm $\mathcal{A}_C$ that, given $O_\mathcal{D}$ and $U_{f,\theta}$ and a temperature $\beta = \Omega(\log P)$, samples $\hat\theta \sim \pi_\beta$ from the Gibbs measure*
+*There exists a fault-tolerant quantum algorithm $\mathcal{A}_C$ that, given $O_\mathcal{D}$ and $U_{f,\theta}$ and a temperature $\beta = \Theta(\log P)$, samples $\hat\theta \sim \pi_\beta$ from the Gibbs measure*
 
 $$\pi_\beta(\theta) \;\propto\; \exp\bigl(-\beta\,\mathcal{L}(\theta)\bigr)$$
 
 *to total-variation accuracy $\varepsilon$ in time*
 
-$$\widetilde{O}\bigl(\mathrm{poly}(P)\cdot \varepsilon^{-c}\bigr),\qquad c < 1.75.$$
+$$\widetilde{O}\bigl(\mathrm{poly}(P)\cdot \varepsilon^{-c}\bigr),\qquad c < 2.$$
 
-*Under standard concentration assumptions, $\hat\theta$ is an $\varepsilon$-approximate second-order stationary point of $\mathcal{L}$.*
+*Under standard concentration assumptions, $\hat\theta$ concentrates on $\varepsilon$-approximate first-order stationary points of $\mathcal{L}$, and — under a local-Hessian spectral-gap assumption — on $\varepsilon$-approximate second-order stationary points.*
+
+The target value of the constant $c$ is $c \le 1.75$, motivated by composing the quartic Witten-Laplacian-acceleration upper bound of [arXiv:2505.05301](https://arxiv.org/abs/2505.05301) with the classical $\varepsilon^{-2}$ non-logconcave-Langevin baseline (giving $\varepsilon^{-0.5}$ in the most optimistic regime) and a more conservative pessimisation that accounts for the polynomial $P$-dependence absorbing slack. The conjecture is robust to any $c < 2$: even a strictly-sub-quadratic improvement over classical non-logconcave Langevin would be a substantive theorem in this setting.
 
 ---
 
@@ -116,9 +122,17 @@ $$\widetilde{O}\bigl(\mathrm{poly}(P)\cdot \varepsilon^{-c}\bigr),\qquad c < 1.7
 
 Form A composes four established quantum primitives. The $\sqrt{N}$ factor follows from quadratic speedup for sample-mean estimation via amplitude estimation [(Brassard–Høyer–Mosca–Tapp, 2002)](https://arxiv.org/abs/quant-ph/0005055); [Montanaro (Proc. Roy. Soc. A 2015)](https://arxiv.org/abs/1504.06987); [Cornelissen–Hamoudi–Jerbi (STOC 2022)](https://arxiv.org/abs/2111.09787). Writing $\nabla \mathcal{L} = N^{-1}\sum_i \nabla\ell_i$, the multivariate quantum mean estimator achieves additive $\varepsilon$ in $\ell_2$ norm using $\widetilde{O}(\sqrt{N}/\varepsilon)$ queries to a per-sample gradient oracle.
 
-The $\sqrt{P}$ factor follows from quantum gradient estimation in $P$ dimensions [(Gilyén–Arunachalam–Wiebe, SODA 2019)](https://arxiv.org/abs/1711.00465), which is optimal up to polylogarithmic factors against a matching $\widetilde{\Omega}(\sqrt{P}/\varepsilon)$ lower bound in the continuous-phase-query model.
+The $\sqrt{P}$ factor follows from quantum gradient estimation in $P$ dimensions [(Gilyén–Arunachalam–Wiebe, SODA 2019)](https://arxiv.org/abs/1711.00465), which is optimal up to polylogarithmic factors against a matching $\widetilde{\Omega}(\sqrt{P}/\varepsilon)$ lower bound in the continuous-phase-query model. The matching $N$-dependent lower bound for multivariate empirical-risk mean estimation is established by [Cornelissen–Hamoudi–Jerbi (STOC 2022)](https://arxiv.org/abs/2111.09787); their analysis is the appropriate reference for any tightness argument on the $\sqrt{N}\sqrt{P}/\varepsilon$ rate.
 
 The circuit-depth bound $\widetilde{O}(L \cdot \mathrm{polylog})$ requires that the forward pass remain sequentially depth-$L$ after block-encoding composition, consistent with the layer-wise structure of standard architectures.
+
+**Speedup regime — the comparison that matters.** The Gilyén–Arunachalam–Wiebe $\sqrt{P}$ factor is a saving over *finite-difference* gradient estimation (which costs $P$ forward passes), not over the classical state of the art. The classical state of the art for neural-network gradients is reverse-mode automatic differentiation (Baur–Strassen, §2.2), which computes the *entire* gradient in $O(1)$ forward-pass-equivalents — independent of $P$. Composed over $N$ samples, classical empirical-risk-gradient computation therefore costs $O(N)$ forward-pass-equivalents.
+
+Form A claims $\widetilde{O}(\sqrt{NP}/\varepsilon)$ queries to $U_{f,\theta}$. The quantum advantage over classical AD is therefore real only when
+
+$$\sqrt{NP}/\varepsilon \;<\; N \quad\Longleftrightarrow\quad N \;\gg\; P/\varepsilon^{2}.$$
+
+For frontier models with $P \sim 10^{12}$ parameters and $N \sim 10^{10}$ training tokens, this regime requires $\varepsilon^2 > 100$ — far outside any useful precision. The Form A speedup window is genuine in the *large-data, modest-precision* regime (e.g., low-bit-precision pretraining on $N \gg P$ corpora, or coarse-gradient curriculum stages) but is *illusory in the parameter-dominated frontier-model regime*. The conjecture remains non-trivial; the headline $\sqrt{NP}$ scaling, however, is not by itself a speedup against AD. Any preprint or proof must lead with this regime distinction.
 
 **Obstructions.** Three technical conditions must be discharged:
 
@@ -134,13 +148,20 @@ Form B rests on the observation that for a Hamiltonian $H_\theta$ with parameter
 
 $$\nabla_\theta \mathcal{L}(\theta) \;=\; \langle\psi\,|\,i[H_\mathcal{L}, \partial_\theta H_\theta]\,|\,\psi\rangle$$
 
-in a Heisenberg-picture sense. Given block-encodings of both operators, quantum singular value transformation [(Gilyén–Su–Low–Wiebe, STOC 2019)](https://arxiv.org/abs/1806.01838) applies any bounded polynomial to the singular values of the encoded operator. The commutator estimate is therefore reducible to phase estimation on a polynomial-in-$1/\varepsilon$-degree block-encoding of $i[H_\mathcal{L}, \partial_\theta H_\theta]$.
+in a Heisenberg-picture sense — equivalently, the parameter-shift / Feynman–Hellmann identity for the variational expectation. Given block-encodings of both operators, quantum singular value transformation [(Gilyén–Su–Low–Wiebe, STOC 2019)](https://arxiv.org/abs/1806.01838) applies any bounded polynomial to the singular values of the encoded operator. The commutator estimate is therefore reducible to phase estimation on a polynomial-in-$1/\varepsilon$-degree block-encoding of $i[H_\mathcal{L}, \partial_\theta H_\theta]$.
+
+**Where does the data enter?** This is the central open question for Form B, and it is what separates "QSVT in $\widetilde{O}(\alpha/\varepsilon)$ queries" from a usable training algorithm. The conjecture presupposes an $(\alpha, a, \varepsilon)$-block-encoding $U_{H_\theta}$ of a data-dependent loss Hamiltonian — naturally, $H_\theta \propto \sum_i \ell(f_\theta(x_i), y_i)$. Two questions about this construction must be answered:
+
+- **(D1) Measurement-free construction.** Is there a polynomial-time construction of $U_{H_\theta}$ from $O_\mathcal{D}$ and $U_{f,\theta}$ that does *not* require intermediate measurement of the per-sample loss? If construction goes via per-sample measurement, [Abbas et al. (NeurIPS 2023)](https://arxiv.org/abs/2305.13362) reasserts itself. If construction requires the dataset to be loaded classically into a fault-tolerant register, the build cost is at least $\Omega(N)$ and the QSVT $\widetilde{O}(\alpha/\varepsilon)$ speedup is erased.
+- **(D2) Normalisation scaling.** What is the dependence of $\alpha$ on $N$? Crude bounds give $\alpha = \Theta(N \|\ell\|_\infty)$, in which case subnormalisation reintroduces precision loss. Whether tighter normalisations are available for natural loss functions (cross-entropy, squared error, contrastive) is open.
+
+Until (D1) and (D2) are addressed, Form B is best read as: *conditional on a data-respecting block-encoding existing*, QSVT computes the gradient in $\widetilde{O}(\alpha/\varepsilon)$ queries. The conditional is load-bearing — it is currently the most important obstruction in the conjecture.
 
 **Obstructions.**
 
-- **(O4) Non-linearity polynomial-approximation cost.** ReLU, softmax, and GELU activations do not block-encode cleanly. They must be approximated by polynomials of degree $d(\varepsilon) = \mathrm{poly}(1/\varepsilon)$, contributing a polynomial-in-$1/\varepsilon$ overhead to circuit depth.
-- **(O5) Block-encoding normalisation.** The normalisation factor $\alpha$ typically grows with the spectral norm of the encoded operator, which for neural-network losses depends on network width and depth in ways that can erode the claimed speedup.
-- **(O6) Measurement collapse.** Per [Abbas et al. (NeurIPS 2023)](https://arxiv.org/abs/2305.13362), gradients of parameterised quantum models cannot be efficiently estimated under single-copy access. Form B circumvents this by representing the loss coherently as a block-encoded operator rather than as the output of a parameterised circuit, but requires that the block-encoding be efficiently constructible without intermediate measurement.
+- **(O4) Non-linearity polynomial approximation and depth compounding.** ReLU, softmax, and GELU activations do not block-encode cleanly. Approximating ReLU to additive $\varepsilon$ on a bounded interval requires a polynomial of degree $\Theta(1/\sqrt{\varepsilon})$ (Eremenko–Yuditskii type bounds for non-smooth functions). For an $L$-layer network, naive composition compounds this to total degree $\Theta((1/\sqrt{\varepsilon})^L)$ — exponential in depth. A useful Form B therefore either (a) restricts to shallow architectures where the depth-exponential factor is controllable, (b) replaces the global polynomial approximation by a linear-combination-of-unitaries treatment over piecewise-linear segments of the activation, or (c) interleaves layer-wise tomographic refresh between blocks (paying a quantum-tomography overhead, but bounded as in [Abbas et al.](https://arxiv.org/abs/2305.13362)). Whether any of (a)–(c) preserves the headline $\widetilde{O}(\alpha/\varepsilon)$ rate is open.
+- **(O5) Block-encoding normalisation.** The normalisation factor $\alpha$ typically grows with the spectral norm of the encoded operator. For cross-entropy losses on softmax outputs, $\|H_\mathcal{L}\|$ can be unbounded without an a priori activation-norm bound. A normalisation bound under realistic loss functions must be either proved or assumed explicitly. This obstruction is closely coupled to (D2).
+- **(O6) Measurement collapse.** Per [Abbas et al. (NeurIPS 2023)](https://arxiv.org/abs/2305.13362), gradients of parameterised quantum models cannot be efficiently estimated under single-copy access. Form B circumvents this by representing the loss coherently as a block-encoded operator rather than as the output of a parameterised circuit, but only conditional on (D1) — that the block-encoding itself be efficiently constructible without intermediate measurement.
 
 ---
 
@@ -152,13 +173,13 @@ The [Zhang–Leng–Li (ICML 2023)](https://arxiv.org/abs/2212.03906) and [Garg�
 - up to exponential speedup for non-reversible Markov chains, beating the quadratic limit of reversible-walk methods inherited from [Szegedy (FOCS 2004)](https://ieeexplore.ieee.org/document/1366222) and [Magniez–Nayak–Roland–Santha (SIAM J. Comput. 2011)](https://epubs.siam.org/doi/10.1137/090745854);
 - application to optimisation via Gibbs sampling at large $\beta$ [(arXiv:2504.03626, 2025)](https://arxiv.org/abs/2504.03626).
 
-Neural-network posteriors are non-logconcave by construction. Sampling from $\pi_\beta \propto \exp(-\beta\mathcal{L})$ at large $\beta$ concentrates on minima of $\mathcal{L}$. For smooth $\mathcal{L}$ the concentration is to first-order stationary points; under additional spectral-gap assumptions on the local Hessian, to second-order stationary points as well [(Zhang–Leng–Li, Quantum 2021)](https://arxiv.org/abs/2007.10253).
+Neural-network posteriors are non-logconcave by construction. Sampling from $\pi_\beta \propto \exp(-\beta\mathcal{L})$ at large $\beta$ concentrates on minima of $\mathcal{L}$. For smooth $\mathcal{L}$ the concentration is to first-order stationary points; under additional spectral-gap assumptions on the local Hessian, to second-order stationary points. The relevant concentration result is the standard metastability/large-deviations analysis of low-temperature Gibbs measures over Morse-type landscapes — see Bovier and den Hollander, *Metastability: A Potential-Theoretic Approach* (Springer, 2015), Ch. 4–5; the more recent isoperimetric line in [Eldan, Lee, and Lehec (2020)](https://arxiv.org/abs/1905.04578) provides quantitative bounds under weaker logconcavity assumptions. The earlier-cited [Zhang, Leng, and Li (Quantum 2021)](https://arxiv.org/abs/2007.10253) is about *saddle-point escape via quantum wave equations*, a related but distinct mechanism, and is not the appropriate reference for the concentration step.
 
 **Obstructions.**
 
 - **(O7) Spectral-gap dependence.** The runtime of quantum Langevin methods depends polynomially on the spectral gap of the underlying chain. For deep-network loss landscapes the gap behaviour is empirically unknown and may scale unfavourably with width or depth.
-- **(O8) Temperature scaling.** Reaching an $\varepsilon$-approximate stationary point requires $\beta = \Omega(\log P)$, contributing additional polynomial factors that the conjecture absorbs into $\mathrm{poly}(P)$ but a proof must bound explicitly.
-- **(O9) Dequantisation.** The [Tang (STOC 2019)](https://arxiv.org/abs/1807.04271) — [Chia–Gilyén–Li–Lin–Tang–Wang (STOC 2020)](https://arxiv.org/abs/1910.06151) dequantisation programme has repeatedly collapsed apparent quantum speedups to polynomial via length-squared sampling. The non-logconcave regime is where these techniques have so far not applied; a proof of Form C must remain outside the reach of any extended dequantisation.
+- **(O8) Temperature scaling.** Reaching an $\varepsilon$-approximate stationary point requires $\beta = \Theta(\log P)$, contributing additional polynomial factors that the conjecture absorbs into $\mathrm{poly}(P)$ but a proof must bound explicitly.
+- **(O9) Dequantisation — and what would have to be true to survive it.** The [Tang (STOC 2019)](https://arxiv.org/abs/1807.04271) — [Chia–Gilyén–Li–Lin–Tang–Wang (STOC 2020)](https://arxiv.org/abs/1910.06151) dequantisation programme — extended in the [Bakshi–Tang (STOC 2024)](https://arxiv.org/abs/2303.01492) line on classical singular-value-transformation analogues — has repeatedly collapsed apparent quantum speedups to polynomial via length-squared sampling. The non-logconcave regime is where these techniques have so far not applied, but absence-of-attack is not proof-of-resistance. A proof of Form C must give a *structural reason* why the relevant operator does not admit classical length-squared sampling — for example: (i) the kernel of the factorised Witten Laplacian on a non-logconcave loss does not admit a low-rank approximation in any basis efficiently samplable from $O_\mathcal{D}$, or (ii) the non-reversible quantum walk underlying the speedup has stationary distribution whose entry distribution is not concentrated enough for $\ell_2^2$-sampling to track it within polynomial overhead. Without an explicit such argument, Form C is open to dequantisation in principle; the failure of the existing dequantisation programme is encouraging but not a proof.
 
 ---
 
@@ -195,7 +216,7 @@ The line begins with [Jordan (PRL 2005)](https://arxiv.org/abs/quant-ph/0405146)
 Concrete falsification routes for each form:
 
 - **Form A is falsified** by a proof that any quantum algorithm computing $\nabla\mathcal{L}$ to $\ell_\infty$ error $\varepsilon$ from $O_\mathcal{D}$ and $U_{f,\theta}$ requires $\Omega(NP^{1-o(1)}\varepsilon^{-1})$ queries, or by extension of [Zhang–Leng–Li (ICML 2023)](https://arxiv.org/abs/2212.03906) to the empirical-risk-gradient setting at the conjectured precision.
-- **Form B is falsified** by a proof that block-encoding the forward pass of any constant-depth ReLU network requires degree super-polynomial in $1/\varepsilon$, or by an explicit reduction showing such a block-encoding implies an efficient solution to shadow tomography of polynomial-time observables [(Abbas et al., 2023)](https://arxiv.org/abs/2305.13362).
+- **Form B is falsified** by (a) a proof that any measurement-free block-encoding of $H_\theta \propto \sum_i \ell(f_\theta(x_i), y_i)$ requires $\Omega(N)$ data-loading queries even at constant depth (closing (D1)/(D2)); (b) a tightness result on activation-polynomial approximation showing that *no* LCU or piecewise treatment escapes the depth-exponential $(1/\sqrt{\varepsilon})^L$ blow-up of (O4); or (c) an explicit reduction showing such a block-encoding implies an efficient solution to shadow tomography of polynomial-time observables [(Abbas et al., 2023)](https://arxiv.org/abs/2305.13362).
 - **Form C is falsified** by a dequantisation result extending [Chia et al. (STOC 2020)](https://arxiv.org/abs/1910.06151) to block-encoded non-logconcave Gibbs measures under classical length-squared sampling, or by a proof that the spectral gap of the relevant Markov chain on $\mathbb{R}^P$ depends super-polynomially on $P$ for natural network architectures.
 
 ---
@@ -210,8 +231,8 @@ The conjecture is not that quantum computers will train neural networks faster t
 
 The arXiv-style preprint contains the same statements with formal theorem environments and a bibliography in `plainnat` style.
 
-- **PDF:** [`/quantum-nn-training-conjecture.pdf`](/quantum-nn-training-conjecture.pdf) (110 KB, 10 pages)
-- **LaTeX source:** [`/quantum-nn-training-conjecture.tex`](/quantum-nn-training-conjecture.tex) (31 KB, self-contained, MIT-licensed)
+- **PDF:** [`/quantum-nn-training-conjecture.pdf`](/quantum-nn-training-conjecture.pdf) (132 KB, 11 pages)
+- **LaTeX source:** [`/quantum-nn-training-conjecture.tex`](/quantum-nn-training-conjecture.tex) (40 KB, self-contained, MIT-licensed)
 
 Compilation under `tectonic`:
 
