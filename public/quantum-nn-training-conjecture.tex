@@ -46,7 +46,7 @@ A Conjecture on Fault-Tolerant Speedups}}
 \maketitle
 
 \begin{abstract}
-We state, in three escalating forms, a mathematical conjecture for a fault-tolerant quantum algorithm that accelerates --- or replaces --- backpropagation for empirical-risk minimisation in neural networks. The conjecture is positioned against six bodies of established literature: (i) the Baur--Strassen \cite{BaurStrassen1983} cheap-gradient bound, (ii) Jordan's \cite{Jordan2005} and Gily\'{e}n--Arunachalam--Wiebe's \cite{GAW2019} quantum-gradient-estimation algorithms with matching lower bounds, (iii) Abbas et al.'s \cite{AbbasEtAl2023} NeurIPS~2023 impossibility and shadow-tomography workaround for parameterised quantum models, (iv) quantum semidefinite-programming and interior-point solvers \cite{BrandaoSvore2017,vAGGdW2020,KerenidisPrakash2020,Augustino2023}, (v) the Zhang--Leng--Li \cite{ZhangLengLi2023} stationary-point and Garg--Kothari--Netrapalli--Sherif \cite{GKNS2021} non-smooth lower bounds, and (vi) the recent 2024--2026 line on quantum-enhanced non-reversible Markov chains and non-logconcave sampling \cite{QuantumNonLogconcave2025,QuantumMCMCOpt2025}. Form~A predicts a $\Otil(\sqrt{NP}/\veps)$ quantum-query upper bound for full-gradient estimation of empirical risk on $N$ samples and $P$ parameters. Form~B predicts the same gradient is recoverable from a quantum singular-value-transformation commutator estimate, with the chain rule never invoked. Form~C predicts that training, reformulated as non-logconcave quantum sampling, reaches an $\veps$-approximate second-order stationary point at an exponent below the classical~$\veps^{-1.75}$. For each form we specify the access model, identify which existing lower bound it must thread, and enumerate falsification routes. The conjecture is offered as an open problem, not a theorem.
+We state, in three escalating forms, a mathematical conjecture --- hereafter the \emph{Suhubdy Conjecture} --- for a fault-tolerant quantum algorithm that accelerates or replaces backpropagation for empirical-risk minimisation in neural networks. The conjecture is positioned against six bodies of established literature: (i) the Baur--Strassen \cite{BaurStrassen1983} cheap-gradient bound, (ii) Jordan's \cite{Jordan2005} and Gily\'{e}n--Arunachalam--Wiebe's \cite{GAW2019} quantum-gradient-estimation algorithms with matching lower bounds, (iii) Abbas et al.'s \cite{AbbasEtAl2023} NeurIPS~2023 impossibility and shadow-tomography workaround for parameterised quantum models, (iv) quantum semidefinite-programming and interior-point solvers \cite{BrandaoSvore2017,vAGGdW2020,KerenidisPrakash2020,Augustino2023}, (v) the Zhang--Leng--Li \cite{ZhangLengLi2023} stationary-point and Garg--Kothari--Netrapalli--Sherif \cite{GKNS2021} non-smooth lower bounds, and (vi) the recent 2024--2026 line on quantum-enhanced non-reversible Markov chains and non-logconcave sampling \cite{QuantumNonLogconcave2025,QuantumMCMCOpt2025}. Form~A predicts a $\Otil(\sqrt{NP}/\veps)$ quantum-query upper bound for full-gradient estimation of empirical risk on $N$ samples and $P$ parameters. Form~B predicts the same gradient is recoverable from a quantum singular-value-transformation commutator estimate, with the chain rule never invoked. Form~C predicts that training, reformulated as non-logconcave quantum sampling, reaches an $\veps$-approximate second-order stationary point at an exponent below the classical~$\veps^{-1.75}$. For each form we specify the access model, identify which existing lower bound it must thread, and enumerate falsification routes. The conjecture is offered as an open problem, not a theorem.
 \end{abstract}
 
 \medskip
@@ -116,11 +116,11 @@ A unitary $U$ is an $(\alpha, a, \veps)$-block-encoding of the loss Hamiltonian 
 We allow $H_\loss = \nabla^2 \ell(f_\theta(x), y)$ or any Hermitian observable whose expectation encodes $\loss(\theta)$ \cite{GSLW2019}.
 \end{definition}
 
-\section{The conjecture}\label{sec:conjecture}
+\section{The Suhubdy Conjecture}\label{sec:conjecture}
 
-We state the conjecture in three forms, ordered by increasing strength and decreasing similarity to classical backpropagation.
+We state the \emph{Suhubdy Conjecture} in three forms (A, B, C), ordered by increasing strength and decreasing similarity to classical backpropagation. Individual claims are referred to as \emph{Suhubdy Conjecture (Form~A / B / C)}.
 
-\begin{conjecture}[Form A: Quantum-accelerated backpropagation]\label{conj:A}
+\begin{conjecture}[Suhubdy, Form A --- Quantum-accelerated backpropagation]\label{conj:A}
 There exists a fault-tolerant quantum algorithm $\Alg_A$ such that, for every $\veps, \delta \in (0,1)$, given oracles $O_\Dset$ (Def.~\ref{def:data-oracle}) and $U_{f,\theta}$ (Def.~\ref{def:fwd-oracle}), $\Alg_A$ returns $\tilde g \in \R^P$ satisfying
 \[
 \Pr\bigl[\,\|\tilde g - \nabla_\theta \loss(\theta)\|_\infty \le \veps\,\bigr] \;\ge\; 1 - \delta
@@ -133,7 +133,7 @@ using
 \end{enumerate}
 \end{conjecture}
 
-\begin{conjecture}[Form B: Backpropagation replacement]\label{conj:B}
+\begin{conjecture}[Suhubdy, Form B --- Backpropagation replacement]\label{conj:B}
 There exists a fault-tolerant quantum algorithm $\Alg_B$ that, given an $(\alpha, a, \veps)$-block-encoding $U_{H_\theta}$ of the parameter Hamiltonian and access to the derivative-generator $\partial_\theta H_\theta$, recovers
 \[
 \nabla_\theta \loss(\theta) \;=\; \Bigl\langle\,i[H_\loss, \partial_\theta H_\theta]\,\Bigr\rangle
@@ -141,7 +141,7 @@ There exists a fault-tolerant quantum algorithm $\Alg_B$ that, given an $(\alpha
 via quantum singular-value transformation \cite{GSLW2019} and phase estimation in $\Otil(\alpha/\veps)$ queries to $U_{H_\theta}$. The chain rule on $G$ is invoked nowhere in $\Alg_B$.
 \end{conjecture}
 
-\begin{conjecture}[Form C: Non-gradient training]\label{conj:C}
+\begin{conjecture}[Suhubdy, Form C --- Non-gradient training]\label{conj:C}
 There exists a fault-tolerant quantum algorithm $\Alg_C$ that, given $O_\Dset$ and $U_{f,\theta}$ and a temperature $\beta = \Omega(\log P)$, samples $\hat\theta \sim \pi_\beta$ from the Gibbs measure
 \[
 \pi_\beta(\theta) \;\propto\; \exp\bigl(-\beta\,\loss(\theta)\bigr)
