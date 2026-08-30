@@ -58,13 +58,13 @@ Cash does not care where it has been. Digital money on a public ledger does. Ana
 
 This is a quiet but corrosive failure. A dollar that can be refused because of what a stranger did with it three owners ago is not really a dollar.
 
-### The problem gets worse with time, not better
+### The exposure is retroactive
 
-Two properties make ledger exposure unlike most privacy problems.
+One property makes ledger exposure unlike most privacy problems: it works backwards in time.
 
-First, it is **retroactive**. Ordinary data leaks are bounded by what has been collected. A public chain is a complete, permanent archive that has already been collected. A deanonymization technique invented in 2031 applies with full force to a payment made in 2026. You cannot patch the past.
+Ordinary data leaks are bounded by what someone managed to collect. A public chain is a complete, permanent archive that has _already_ been collected, by everyone, and copied to thousands of machines. A deanonymization technique invented in 2031 applies with full force to a payment you made in 2026. You cannot patch the past, you cannot rotate a key to undo it, and you cannot ask for it to be deleted. Whatever privacy a payment has is fixed at the moment it is made, forever.
 
-Second, it is **quantum-shadowed**. Some privacy schemes hide today's transactions behind elliptic-curve cryptography — the same mathematics Shor's algorithm is expected to dismantle once a large enough quantum computer exists. Anyone can archive the encrypted ledger today and decrypt it later. "Harvest now, decrypt later" is not a hypothetical strategy; it is the stated motivation behind the entire post-quantum migration effort at NIST. For a payment system whose records are public and permanent, choosing pre-quantum privacy is choosing a privacy guarantee with an expiry date you don't control.
+That single fact is why the choice of privacy technology matters more here than almost anywhere else — a point we return to at the end, for readers who want the cryptographic version.
 
 ### Private, not opaque
 
@@ -78,7 +78,7 @@ The distinction that matters is between **confidentiality** and **unaccountabili
 
 ## 2. The machine: a shielded pool, a bridge, and a market for proofs
 
-Now the constructive part. Rand Protocol is a post-quantum, privacy-preserving chain that runs the Solana Virtual Machine, reaches agreement using HotStuff Byzantine Fault Tolerant consensus, and — this is the unusual part — outsources the expensive privacy mathematics to a permissionless market of GPU owners. It carries two utility tokens: **ATLAS** for public gas, validator stake, and governance, and **SHRUGG** for private gas and prover rewards. The dollar-denominated asset that rides on top is **USDB**.
+Now the constructive part. Rand Protocol is a privacy-preserving chain that runs the Solana Virtual Machine, reaches agreement using HotStuff Byzantine Fault Tolerant consensus, and — this is the unusual part — outsources the expensive privacy mathematics to a permissionless market of GPU owners. It carries two utility tokens: **ATLAS** for public gas, validator stake, and governance, and **SHRUGG** for private gas and prover rewards. The dollar-denominated asset that rides on top is **USDB**.
 
 Here is how a private dollar payment actually happens.
 
@@ -100,7 +100,7 @@ Alongside the nullifier you publish a **zero-knowledge proof** — a mathematica
 
 The proof reveals none of the underlying facts. Observers see: a Merkle root, some nullifiers, some new commitments, and a proof that everything adds up. They do not see who paid whom, or how much.
 
-Rand's proofs are **STARKs**, which matters for one specific reason: a STARK's security rests only on the difficulty of finding collisions in a hash function. There are no elliptic curves, no pairings, no trusted setup ceremony, and — critically — nothing for Shor's algorithm to attack. A shielded transaction made today stays shielded after quantum computers arrive.
+Rand's proofs are **STARKs**. Two things follow from that choice: there is no trusted setup ceremony to go wrong, and the security of the proof rests on nothing more exotic than the difficulty of finding collisions in a hash function. The second property turns out to matter a great deal for a payment record that has to stay private permanently, which is the subject of the last section.
 
 ### The bridge: where the dollars come from
 
@@ -129,7 +129,7 @@ So Rand turns proof generation into a market. A user who wants to make a private
 **And here is the sharp edge, stated plainly:** to build a proof, the prover normally needs the witness — the very secrets the proof is designed to hide. Handing your witness to a stranger to save five seconds is not privacy. Any honest description of delegated proving has to say what is done about this, and the answer is a layered one:
 
 - **Self-proving is the default for anyone who can.** If you have a GPU, you never delegate, and the question doesn't arise. Delegation is a convenience for phones and light clients.
-- **Encrypt to a chosen prover.** The witness is sealed to one specific prover's key using post-quantum key encapsulation (CRYSTALS-Kyber), so it is never broadcast. You choose whom to trust, per transaction, and you can rotate.
+- **Encrypt to a chosen prover.** The witness is sealed to one specific prover's key using a key encapsulation scheme (CRYSTALS-Kyber), so it is never broadcast. You choose whom to trust, per transaction, and you can rotate.
 - **Stake and slash.** Provers post bonds. A prover caught leaking or censoring loses the bond. This converts a privacy risk into a priced, bounded economic one — imperfect, but the same trade every custodial relationship makes.
 - **Compartmentalize.** A delegated prover sees one transaction, not an identity graph. Rotating provers across transactions means no single operator accumulates a linkable history.
 - **Push the frontier.** The genuinely correct fix is delegating proof generation without revealing the witness at all — the research direction usually filed under _privacy-preserving delegation_ or _proof outsourcing_. It is an active area, it is not solved cheaply yet, and any protocol claiming otherwise deserves scepticism.
@@ -246,9 +246,102 @@ One more idea makes the whole thing scale. Verifying a STARK is itself a computa
 
 This is why block verification stays cheap no matter how much traffic the network carries. Validators do not check a thousand proofs; they check one, in a few milliseconds. The cost of privacy is pushed entirely onto a parallel, competitive, permissionless market of GPU operators who are paid for it — which was the design goal from the start.
 
+### How long it all takes
+
+It is worth putting real numbers on this, because the asymmetry between making a proof and checking one is the single most counterintuitive thing in the system.
+
+Building a private transfer proof on a GPU takes **roughly three to ten seconds**, depending on the card, the number of inputs and outputs, and how deep the Merkle tree is. The same work on a well-optimized CPU takes minutes. Verifying that proof takes **two to five milliseconds**, on one core, on any laptop.
+
+That is a ratio of about a thousand to one. The prover burns five seconds of a saturated graphics card; every validator in the network confirms the result in the time it takes a screen to draw a frame. The finished proof is 50–200 KB — call it 120 KB typical — which is large by blockchain standards and trivial by internet standards.
+
+Stacked into an end-to-end payment, the budget looks like this:
+
+| Step                                      | Time         |
+| ----------------------------------------- | ------------ |
+| Build the proof (GPU, possibly delegated) | 3–10 s       |
+| Broadcast a ~120 KB proof                 | < 1 s        |
+| Wait for inclusion in a block             | ~2 s         |
+| Verification, by each validator           | 2–5 ms       |
+| Deterministic finality (three QC rounds)  | ~6 s         |
+| **End to end, submit to irreversible**    | **~10–20 s** |
+
+Note what dominates: the wait is proof generation, not consensus. Consensus contributes about six seconds and is fixed; proving contributes the rest and is the part that gets faster every year.
+
+### What that means for throughput
+
+Three ceilings apply, and the binding one is not what people expect.
+
+**Verification is not the bottleneck.** At three milliseconds per proof, one core checks around 330 proofs per second, and validators can verify in parallel across cores. Thousands of private transactions per second are within reach of the checking side alone.
+
+**Bandwidth is.** A 120 KB proof multiplied by 300 transactions per second is 36 MB every second, arriving at every validator, continuously. That is roughly 290 Mbps of sustained gossip traffic — before blocks, votes, and state sync. Sustained network capacity, not cryptography, is what caps a naive design at something in the low hundreds of private transactions per second. Public, transparent SVM transactions are unaffected and run in the thousands, since they carry signatures rather than proofs.
+
+**Recursion moves the ceiling somewhere else entirely.** Aggregate a thousand transaction proofs into one, and the chain carries a single 200 KB object and performs a single verification regardless of how many payments it represents. On-chain cost becomes nearly constant. The limit then stops being the blockchain and becomes the size of the prover fleet: if one proof needs five GPU-seconds, then a thousand GPUs produce two hundred private transactions per second, and ten thousand GPUs produce two thousand.
+
+Which is the interesting part. Past a certain point, throughput on this design is not a research problem. It is a purchasing decision.
+
+### Why low latency and high throughput are not the priority right now
+
+There is a strong instinct in this industry to compete on transactions per second, and it would be a mistake to optimize for that here — not because speed is bad, but because it is the constraint most likely to relax on its own.
+
+**Fifteen seconds is already faster than everything it replaces.** The workloads that actually want a private dollar are payroll, supplier invoices, remittances, and treasury movements. Today those settle over ACH in one to three business days, over correspondent banking in hours or days with a bank holiday risk attached, or over cards with instant authorization but T+2 settlement and a chargeback window measured in months. Against that field, ten to twenty seconds to _irreversible_ finality is not a compromise. It is an enormous improvement, and no CFO waiting on a Friday wire is going to notice the difference between ten seconds and one.
+
+**The demand does not exist yet.** Building for a hundred thousand transactions per second before you have a hundred is the most reliably repeated mistake in this field. Most chains that shipped enormous capacity run at low single-digit percentages of it. The scarce resources at this stage are the anonymity set, audited bridge security, and someone's willingness to run payroll through the thing — not blockspace.
+
+**Some latency is a privacy feature.** This is the part people miss. Privacy comes from being one of many, and being one of many takes time. Unshield the instant you shield and the timing correlation identifies you no matter how good the cryptography is. Batching, standard denominations, and deliberate delays before exit are how the anonymity set gets built, which means a shielded system optimized down to sub-second latency has partly defeated its own purpose. The right target is _fast enough that people use it_, not _as fast as physically possible_.
+
+**And the speed arrives without a redesign.** Proving time falls along three independent tracks that multiply together: better GPUs, better proof software — where the last few years have repeatedly delivered multiples, not percentages — and better circuits. Throughput scales horizontally by adding cards to a market that already pays them. None of that requires changing the protocol.
+
+Contrast that with the thing that _cannot_ be retrofitted. From the very first section: ledger exposure is retroactive and permanent. A payment made in the clear today can never be made private later. A payment made privately today can be made faster later, for free, just by waiting for the market to buy better hardware.
+
+So build the property that has to be right from the first block, and let the property that improves on its own improve on its own. Slow and private converges to fast and private. Fast and public never converges to anything.
+
+HTTPS is the precedent worth remembering. In the late 1990s, encrypting a web connection carried a large enough performance penalty that serious engineers argued it could never be the default for ordinary browsing — you turned it on for the checkout page and off everywhere else. The performance argument was correct at the time and irrelevant within a decade, because hardware and implementations caught up while the security property stayed necessary. Nobody today runs a plaintext site to save the handshake.
+
 ### The asymmetry, in one line
 
 All of this rests on a single asymmetry, and it is worth stating without any mathematics at all: **it is hard to solve a sudoku and easy to check one.** Zero-knowledge proofs industrialize that gap. The prover spends five seconds of a saturated graphics card. The verifier spends five milliseconds. And uniquely, the checker learns that the puzzle was solved correctly without ever seeing the solution.
+
+---
+
+## 5. For the technical reader: privacy with no expiry date
+
+Everything so far works against the adversaries we have today. This section is about the one we don't, and it can be skipped by anyone who has read enough already.
+
+Recall the property from the first section: a public ledger is permanent, and exposure works backwards in time. That has an uncomfortable consequence for any privacy scheme built on the cryptography we currently use.
+
+### Harvest now, decrypt later
+
+Two quantum algorithms threaten classical cryptography, and they threaten it in very different ways.
+
+**Shor's algorithm** factors integers and computes discrete logarithms in polynomial time on a sufficiently large quantum computer. That is not a speedup; it is a demolition. RSA, Diffie–Hellman, and every elliptic-curve scheme — including the signatures securing essentially every blockchain in production — fall to it outright.
+
+**Grover's algorithm** searches an unstructured space of size $N$ in about $\sqrt{N}$ steps instead of $N$. This is a real but survivable speedup: it roughly halves the effective security of symmetric primitives like hash functions, which you compensate for by using longer outputs.
+
+Now combine Shor with permanence. An adversary does not need a quantum computer today to attack today's traffic. They need only to _archive_ today's traffic — which, on a public chain, is free and requires no privileged access — and wait. Whatever is encrypted or hidden behind elliptic curves in 2026 becomes readable the year the machine exists. This is called **harvest now, decrypt later**, and it is the stated motivation behind the multi-year post-quantum migration NIST standardized in 2024.
+
+For ordinary web traffic, this is a manageable problem: most TLS sessions are worthless a decade later, and the ones that aren't can be re-encrypted. For a payment ledger, it is not manageable at all. The records are already public, already permanent, and cannot be re-encrypted after the fact. A privacy guarantee on a public chain is a promise about the entire future, or it is not much of a promise.
+
+### Why STARKs rather than SNARKs
+
+This is where the proof system choice stops being an implementation detail.
+
+Many popular zero-knowledge systems — the SNARK family — build their succinctness on elliptic-curve pairings. They produce beautifully small proofs, a few hundred bytes, verifiable in a millisecond. They also inherit exactly the assumption Shor destroys. A shielded transaction whose privacy rests on a pairing-based proof is private until the day it isn't, and on that day it becomes retroactively public along with every other transaction ever made in the same pool.
+
+A STARK's soundness rests only on the collision resistance of a hash function. No curves, no pairings, no trusted setup ceremony whose toxic waste someone has to have destroyed. The price is size — proofs measured in tens or hundreds of kilobytes rather than hundreds of bytes — which is precisely why the bandwidth column in any honest resource table for this design is marked _high_, and why the GPU market in section 3 exists at all. Rand pays that cost deliberately: a bigger proof today in exchange for a privacy guarantee that does not have an expiry date.
+
+Grover still applies, and the accounting is straightforward. A 256-bit hash offers 128 bits of quantum preimage resistance and roughly 85 bits of quantum collision resistance. Since hash collisions dominate the STARK soundness bound, that is the number that actually matters, and it is comfortable at current parameters with a clear upgrade path — move to 384- or 512-bit digests, accept larger proofs.
+
+### The rest of the stack
+
+Choosing a quantum-resistant proof system buys nothing if the signature scheme underneath it falls over, so the same standard is applied throughout:
+
+- **Signatures:** CRYSTALS-Dilithium, whose hardness rests on lattice problems (Module-LWE and Module-SIS) rather than discrete logarithms. Public keys run about 1.3 KB and signatures about 2.4 KB — considerably larger than an ECDSA signature, which is the tax you pay for the property.
+- **Key encapsulation:** CRYSTALS-Kyber, also lattice-based. This is what seals a note to its recipient, and what seals a witness to a chosen prover in the delegated-proving scheme above.
+- **Hashing:** SHA-3 and BLAKE3, symmetric constructions that Shor does not touch and Grover only dents.
+
+Under all of it sits one hard problem. Informally: given a random matrix $\mathbf{A}$ over a polynomial ring and a vector $\mathbf{b} = \mathbf{A}\mathbf{s} + \mathbf{e}$ where $\mathbf{s}$ and $\mathbf{e}$ are _small_, tell $\mathbf{b}$ apart from a uniformly random vector. Adding a little noise to a linear system, it turns out, is enough to make it look like nothing at all — and no efficient algorithm, classical or quantum, is known to undo it.
+
+The honest caveat: lattice assumptions are younger than factoring and have had less time under attack. They are the best available answer, not a proof of safety. What can be said with confidence is narrower and still worth saying — this design has no component that a working quantum computer breaks _outright_, which is more than can be said for the ledger your stablecoins are sitting on right now.
 
 ---
 
